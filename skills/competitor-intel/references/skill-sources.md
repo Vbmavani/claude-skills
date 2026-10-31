@@ -2,7 +2,7 @@
 
 | # | Skill | Repo (licence, last commit) | What was taken |
 |---|---|---|---|
-| 1 | competitive-intelligence | anthropics/knowledge-work-plugins (2026-10-27) | Battlecard and competitor-mention structure |
+| 1 | competitive-intelligence | anthropics/knowledge-work-plugins (Apache-2.0, 2026-10-27) | Battlecard and competitor-mention structure |
 | 2 | competitive-brief (PM) | anthropics/knowledge-work-plugins | Feature-area comparison and positioning |
 | 3 | customer-voice | anthropics/knowledge-work-plugins | Attributed-quote discipline |
 | 4 | customer-research | anthropics/knowledge-work-plugins | Multi-source attribution |

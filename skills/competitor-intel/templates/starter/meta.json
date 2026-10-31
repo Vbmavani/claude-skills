@@ -3,8 +3,8 @@
  "eyebrow": "Competitor intelligence · EXAMPLE market",
  "title": "Product Competitor Intel",
  "subtitle": "STARTER TEMPLATE: replace every EXAMPLE value. N competitors in 3 tiers seen through 4 lenses: their advantages, what we are missing, how we stand out, and the psychology behind their features.",
- "generated": "Researched YYYY-MM-DD (IST)",
- "callout": "<b>Code check.</b> Use this box for the biggest correction the code check forced, or delete the key.",
+ "generated": "Researched YYYY-MM-DD",
+ "callout": "<b>Gap check.</b> Use this box for the biggest correction the gap check forced, or delete the key.",
  "takeaways": [
   {
    "h": "Biggest open lane",

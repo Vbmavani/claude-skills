@@ -31,13 +31,16 @@ Worked example: `examples/2026-10-31_clinozy/` (a clinic SaaS, 214 findings, 16 
 Otherwise use sensible defaults and state them under "Assumptions I made".
 
 ### 0. Start a run
-`scripts/new_run.sh [YYYY-MM-DD] [--from-latest]` creates `runs/<date>/` from `templates/starter/`. With `--from-latest` it copies the previous run instead. It never overwrites an existing run.
+Run every command in this file from the skill folder, and use absolute paths when you brief sub-agents.
+
+`scripts/new_run.sh [YYYY-MM-DD] [--from-latest]` creates `runs/<date>/` from `templates/starter/`. With `--from-latest` it copies the previous run instead. It never overwrites an existing run: on a same-day refresh, pass a different date or keep working in that run.
 
 ### 1. Get our product's context (from whatever the user gave)
-Use `references/product-context.md`. Pick the input mode: an idea only, a website URL, an app-store listing, a deck or doc, code repos, a live app, or a category only. Read the source, then write a brief of 15 lines or fewer covering:
+Use `references/product-context.md`. Pick the input mode: an idea only, a website URL, an app-store listing, a deck or doc, code repos, a live app, or a category only. Read the source, then write a brief of 15 lines or fewer to `runs/<date>/brief.md`, covering:
 - the product line, its stage (idea, pre-launch or live) and the market
 - one line per module or area
 - the platform
+- the feature areas every agent must use (see `references/row-schema.md`)
 
 When sources disagree, the strongest evidence wins: code or live app, then docs, then website, then the idea.
 
@@ -47,7 +50,7 @@ The research agents get only this brief. Also draft the **customer journey** (5â
 Use `references/tiering.md`. Pick 5â€“6 competitors per tier:
 - **Top**: market leaders.
 - **Medium**: established mid-size products.
-- **Peer**: early-stage or niche products at our level.
+- **Peer**: early-stage or niche products at our level. For a market leader, use open-source, niche and fast-rising challengers.
 
 Include at least 2 competitors per tier that are relevant to the user's own market.
 
@@ -100,7 +103,7 @@ Keep each regex specific. Words like `plan` or `call` match unrelated findings a
 
 ### 6. Verify
 - Take the counts from the script output. Never count by hand.
-- Open the page once in Playwright, at desktop width and at 400px in dark mode. Check:
+- Open the page once in whichever browser tool this session has (Playwright or a built-in browser; serve it from localhost if `file://` is refused), at desktop width and at 400px in dark mode. Check:
   - there are no console errors
   - there is no horizontal scroll
   - the lens chips filter

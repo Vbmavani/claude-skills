@@ -1,6 +1,6 @@
 # Psychology levers (and how to beat them)
 
-Drawn from coreyhaines31/marketing-psychology and alirezarezvani/marketing-psychology. Use these names in `psychology` rows and in `meta.json` `levers` so the counts line up.
+Drawn from the marketing-psychology skills in coreyhaines31/marketingskills and alirezarezvani/claude-skills. Use these names in `psychology` rows and in `meta.json` `levers` so the counts line up.
 
 | Lever | How competitors use it | Typical counter-move |
 |---|---|---|
@@ -14,6 +14,7 @@ Drawn from coreyhaines31/marketing-psychology and alirezarezvani/marketing-psych
 | Status quo / fear of complexity | "Simple", free migration, templates | Done-for-you onboarding and import |
 | Speed-to-lead / reciprocity | Instant replies, free audits or consults | Response-time timers; "revenue at risk" counters |
 | Anchoring / decoy | Hidden or USD pricing, three-tier plans with a decoy | Transparent local pricing that sits between the peer and top anchors |
+| Scarcity / usage limits | Credits, quotas, rate limits, "fast request" allowances | Predictable limits and a clear usage meter |
 | Switching costs / lock-in | Long contracts, export friction | Monthly plans, self-serve cancel, one-click export |
 
 Ethics rule: never recommend dark patterns such as fake scarcity, hidden fees or hard-to-cancel flows.

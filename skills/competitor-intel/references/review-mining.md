@@ -1,6 +1,6 @@
 # Review mining playbook (public reactions)
 
-Adapted from coreyhaines31/customer-research (Mode 2) and alirezarezvani/competitive-teardown.
+Adapted from customer-research (Mode 2) in coreyhaines31/marketingskills and competitive-teardown in alirezarezvani/claude-skills.
 
 ## Where to look 
 | Source | Search pattern | Best for |
@@ -17,7 +17,7 @@ Read the 4-star reviews closely: they name the one thing missing.
 Capterra, G2 and some vendor sites may block fetches from the cloud. If so, use search snippets, mark the rows `unverified`, and list the blocked domains in the final report.
 
 ## What to extract per item
-Source URL and date · verbatim quote · sentiment · theme tag (pain / praise / switching trigger / missing feature / pricing) · reviewer profile (clinic type, size, country).
+Source URL and date · verbatim quote · sentiment · theme tag (pain / praise / switching trigger / missing feature / pricing) · reviewer profile (role or company type, size, country).
 
 ## Synthesis
 Rank themes by frequency × intensity. The most common complaint across a tier becomes a stand_out takeaway.

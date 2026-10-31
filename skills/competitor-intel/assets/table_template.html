@@ -1,3 +1,5 @@
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
 <title>__TITLE__</title>
 <meta name="claude:viewport-fit-sides" content="cover">
 <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Bricolage+Grotesque:opsz,wght@12..96,500;12..96,700;12..96,800&family=Instrument+Sans:wght@400;500;600&family=IBM+Plex+Mono:wght@400;500&display=swap">
@@ -252,11 +254,11 @@ footer{color:var(--muted);font-size:13px;padding-block:28px 48px}
 
 <section class="pad" id="explore" aria-labelledby="h-ex"><div class="in">
   <div class="shead"><div><div class="eyebrow">Evidence</div><h2 id="h-ex">Explore every finding</h2>
-    <p class="lede">Pick a lens, then narrow it down. The table scrolls on its own. Click a row to see what users said, the psychology and the code check.</p></div></div>
+    <p class="lede">Pick a lens, then narrow it down. The table scrolls on its own. Click a row to see what users said, the psychology and the gap check.</p></div></div>
   <nav class="lenses" id="lenses" aria-label="Lens"></nav>
   <div class="explorer">
     <form class="filters" id="filters" onsubmit="return false">
-      <label for="q" class="grow">Search<input id="q" type="search" placeholder="WhatsApp, deposit, pricing…"></label>
+      <label for="q" class="grow">Search<input id="q" type="search" placeholder="Search findings…"></label>
       <label for="fTier">Tier<select id="fTier"></select></label>
       <label for="fComp">Competitor<select id="fComp"></select></label>
       <label for="fArea">Feature area<select id="fArea"></select></label>
@@ -287,10 +289,12 @@ const esc = s => String(s??"").replace(/[&<>"]/g,c=>({"&":"&amp;","<":"&lt;",">"
 const rows = DATA.rows, caps = DATA.capabilities||[], stages = DATA.stages||[], levers = DATA.levers||[];
 const comps = [...new Set(rows.map(r=>r.competitor))];
 const tierOf = {}; rows.forEach(r=>{ if(!tierOf[r.competitor]||TIERS.indexOf(r.tier)<TIERS.indexOf(tierOf[r.competitor])) tierOf[r.competitor]=r.tier; });
+const safeUrl = u => /^https?:\/\//i.test(u) ? u : "#";
+const rx = s => { try { return new RegExp(s,"i") } catch(_) { return /$^/ } };
 const short = c => c.replace(/\s*\(.*\)/,"");
 const st = s => s ? `<span class="st ${s}"><i aria-hidden="true">${ICON[s]}</i>${s}</span>` : "";
 
-caps.forEach(c=>{const re=new RegExp(c.match,"i"); c.comps=[...new Set(rows.filter(r=>re.test(r.finding)).map(r=>r.competitor))]
+caps.forEach(c=>{const re=rx(c.match); c.comps=[...new Set(rows.filter(r=>r.dimension!=="stand_out"&&re.test(r.finding)).map(r=>r.competitor))]
   .sort((a,b)=>TIERS.indexOf(tierOf[a])-TIERS.indexOf(tierOf[b]));});
 const count = (list,k) => list.filter(c=>c.status===k).length;
 const B=count(caps,"Built"),P=count(caps,"Partial"),M=count(caps,"Missing"),T=caps.length||1;
@@ -307,7 +311,7 @@ function donut(size,r,w,segs,total,gapPx,center){
 
 /* hero */
 (function(){
-  const h=$("#h1"); h.innerHTML=h.textContent.replace(/(\S+)$/,"<em>$1</em>");
+  const h=$("#h1"); h.innerHTML=esc(h.textContent).replace(/(\S+)$/,"<em>$1</em>");
   $("#ring").style.color="var(--hero-ink)";
   $("#ring").innerHTML=`<title>${B} built, ${P} partial, ${M} missing of ${T} capabilities</title>`+donut(190,78,16,
     [[B,"var(--good)","Built"],[P,"var(--warn)","Partial"],[M,"var(--crit)","Missing"]],T,10,
@@ -327,11 +331,11 @@ $("#track").innerHTML = stages.map(s=>{
   const cs=caps.filter(c=>c.stage===s.id), b=count(cs,"Built"), p=count(cs,"Partial"), m=count(cs,"Missing"), n=cs.length||1;
   const ord={Missing:0,Partial:1,Built:2};
   return `<div class="stage">
-    <div class="node"><svg viewBox="0 0 80 80" role="img" aria-label="${s.label}: ${b} built, ${p} partial, ${m} missing" style="color:var(--ink)">${donut(80,32,7,[[b,"var(--good)","Built"],[p,"var(--warn)","Partial"],[m,"var(--crit)","Missing"]],n,5,
+    <div class="node"><svg viewBox="0 0 80 80" role="img" aria-label="${esc(s.label)}: ${b} built, ${p} partial, ${m} missing" style="color:var(--ink)">${donut(80,32,7,[[b,"var(--good)","Built"],[p,"var(--warn)","Partial"],[m,"var(--crit)","Missing"]],n,5,
       `<text x="40" y="45" text-anchor="middle" font-size="16" font-weight="800" font-family="var(--f-display)" fill="var(--ink)">${b}/${cs.length}</text>`)}</svg>
       <h3>${esc(s.label)}</h3><div class="sub">${esc(s.sub)}</div></div>
     <div class="scard"><ul class="caps">${cs.sort((x,y)=>ord[x.status]-ord[y.status]||y.comps.length-x.comps.length).map(c=>`<li class="cap ${c.status}" tabindex="0"
-      data-tip="<b>${esc(c.name)} · ${c.status}</b>${esc(c.evidence)}<br><br>Offered by: ${esc(c.comps.map(short).join(", ")||"none in findings")}">
+      data-tip="${esc(c.name+" · "+c.status)}" data-body="${esc((c.evidence||"")+"\n\nOffered by: "+(c.comps.map(short).join(", ")||"none in findings"))}">
       <span class="st ${c.status}"><i aria-hidden="true">${ICON[c.status]}</i></span><span><span class="sr">${c.status}: </span>${esc(c.name)}</span><span class="n" title="${c.comps.length} competitors">${c.comps.length}</span></li>`).join("")}</ul></div></div>`;
 }).join("");
 
@@ -343,7 +347,7 @@ $("#takes").innerHTML=(DATA.takeaways||[]).map((t,i)=>`<div class="take"><div cl
   const g=caps.filter(c=>c.status!=="Built"&&c.comps.length).sort((a,b)=>b.comps.length-a.comps.length||(a.status==="Missing"?-1:1)).slice(0,12);
   $("#gapChart").innerHTML=g.map(c=>`<div class="srow"><span class="st ${c.status}" title="${c.status}"><i aria-hidden="true">${ICON[c.status]}</i></span>
     <span class="lab" title="${esc(c.name)}"><span class="sr">${c.status}: </span>${esc(c.name)}</span>
-    <div class="dots">${c.comps.map(x=>`<span class="dot ${tierOf[x]}" data-tip="<b>${esc(x)}</b>${tierOf[x]} tier"></span>`).join("")}</div>
+    <div class="dots">${c.comps.map(x=>`<span class="dot ${tierOf[x]}" data-tip="${esc(x)}" data-body="${esc(tierOf[x])} tier"></span>`).join("")}</div>
     <span class="v">${c.comps.length}</span></div>`).join("");
 })();
 
@@ -355,7 +359,7 @@ $("#takes").innerHTML=(DATA.takeaways||[]).map((t,i)=>`<div class="take"><div cl
   const el=$("#bub"); el.style.gridTemplateColumns=`minmax(96px,auto) repeat(${L.length},minmax(48px,1fr))`;
   el.innerHTML=`<div></div>`+L.map(l=>`<div class="h"><span class="sw L-${l}"></span>${LS[l]}</div>`).join("")+
     areas.map(a=>`<div class="r">${esc(a)}</div>`+L.map(l=>{const v=cell(a,l); const d=v?Math.round(12+Math.sqrt(v/max)*26):0;
-      return `<div class="c" data-tip="<b>${esc(a)} · ${LS[l]}</b>${v} findings">${v?`<i class="L-${l}" style="width:${d}px;height:${d}px">${d>=20?v:""}</i>`:`<i class="zero"></i>`}</div>`}).join("")).join("");
+      return `<div class="c" data-tip="${esc(a+" · "+LS[l])}" data-body="${v} findings">${v?`<i class="L-${l}" style="width:${d}px;height:${d}px">${d>=20?v:""}</i>`:`<i class="zero"></i>`}</div>`}).join("")).join("");
 })();
 
 /* competitor stacks with lens isolate */
@@ -366,7 +370,7 @@ $("#takes").innerHTML=(DATA.takeaways||[]).map((t,i)=>`<div class="take"><div cl
   const max=Math.max(...Object.values(by).flatMap(t=>Object.values(t).map(x=>x.length)));
   $("#stacks").innerHTML=TIERS.filter(t=>by[t]).map(t=>`<div class="tierblock"><div class="tiertag"><span class="dot ${t}" style="width:9px;height:9px;margin-top:2px"></span>${t}</div><div>`+
     Object.entries(by[t]).sort((a,b)=>b[1].length-a[1].length).map(([c,rs])=>`<div class="crow"><span class="lab" title="${esc(c)}">${esc(short(c))}</span>
-      <div class="stack" style="width:${rs.length/max*100}%">${L.map(l=>{const n=rs.filter(r=>r.dimension===l).length;return n?`<span class="L-${l}" data-l="${l}" style="flex:${n}" data-tip="<b>${esc(c)}</b>${LS[l]}: ${n} of ${rs.length}"></span>`:""}).join("")}</div>
+      <div class="stack" style="width:${rs.length/max*100}%">${L.map(l=>{const n=rs.filter(r=>r.dimension===l).length;return n?`<span class="L-${l}" data-l="${l}" style="flex:${n}" data-tip="${esc(c)}" data-body="${LS[l]}: ${n} of ${rs.length}"></span>`:""}).join("")}</div>
       <span class="v">${rs.length}</span></div>`).join("")+`</div></div>`).join("");
   const bars=$("#stacks");
   const iso=l=>{bars.classList.toggle("dim",!!l);bars.querySelectorAll(".stack span").forEach(s=>s.classList.toggle("on",s.dataset.l===l));};
@@ -376,9 +380,9 @@ $("#takes").innerHTML=(DATA.takeaways||[]).map((t,i)=>`<div class="take"><div cl
 /* lever meters */
 (function(){
   const pr=rows.filter(r=>r.dimension==="psychology");
-  const ls=levers.map(l=>{const re=new RegExp(l.match,"i");return {...l,n:pr.filter(r=>re.test((r.psychology||"")+" "+r.finding)).length}}).sort((a,b)=>b.n-a.n);
+  const ls=levers.map(l=>{const re=rx(l.match);return {...l,n:pr.filter(r=>re.test((r.psychology||"")+" "+r.finding)).length}}).sort((a,b)=>b.n-a.n);
   const max=Math.max(10,...ls.map(l=>l.n));
-  $("#levers").innerHTML=ls.map(l=>`<div class="lev" data-tip="<b>${esc(l.name)}</b>Named in ${l.n} of ${pr.length} psychology findings">
+  $("#levers").innerHTML=ls.map(l=>`<div class="lev" data-tip="${esc(l.name)}" data-body="Named in ${l.n} of ${pr.length} psychology findings">
     <div class="top"><b>${esc(l.name)}</b><span class="num">${l.n}</span></div>
     <div class="meter" aria-hidden="true">${Array.from({length:max},(_,i)=>`<span class="${i<l.n?"on":""}"></span>`).join("")}</div>
     <p>${esc(l.counter)}</p></div>`).join("");
@@ -386,7 +390,7 @@ $("#takes").innerHTML=(DATA.takeaways||[]).map((t,i)=>`<div class="take"><div cl
 
 /* tooltip */
 const tip=$("#tip");
-function showTip(el,x,y){tip.innerHTML=el.dataset.tip;tip.style.opacity=1;const w=tip.offsetWidth,h=tip.offsetHeight;
+function showTip(el,x,y){const h1=document.createElement("b"),body=document.createElement("span");h1.textContent=el.dataset.tip;body.textContent=el.dataset.body||"";body.style.whiteSpace="pre-line";tip.replaceChildren(h1,body);tip.style.opacity=1;const w=tip.offsetWidth,h=tip.offsetHeight;
   tip.style.left=Math.min(innerWidth-w-8,Math.max(8,x+14))+"px";tip.style.top=(y-h-14<8?y+18:y-h-14)+"px";}
 document.addEventListener("pointermove",e=>{const el=e.target.closest("[data-tip]");el?showTip(el,e.clientX,e.clientY):tip.style.opacity=0;});
 document.addEventListener("focusin",e=>{const el=e.target.closest("[data-tip]");if(el){const b=el.getBoundingClientRect();showTip(el,b.left,b.top);}});
@@ -409,12 +413,12 @@ function render(){
   const list=filtered();$("#count").textContent=`${list.length} of ${rows.length} shown`;
   if(!list.length){$("#rows").innerHTML=`<tr><td colspan="8" class="empty">No findings match. Clear a filter or the search.</td></tr>`;return;}
   $("#rows").innerHTML=list.map(r=>`<tr data-id="${r.id}" tabindex="0" aria-expanded="${open.has(r.id)}">
-    <td><span class="tierpill"><span class="dot ${r.tier}" style="width:9px;height:9px;box-shadow:none"></span>${esc(r.tier)}</span></td><td><b style="font-weight:600">${esc(r.competitor)}</b></td>
+    <td><span class="tierpill"><span class="dot ${esc(r.tier)}" style="width:9px;height:9px;box-shadow:none"></span>${esc(r.tier)}</span></td><td><b style="font-weight:600">${esc(r.competitor)}</b></td>
     <td><span class="pill"><span class="sw L-${r.dimension}"></span>${LS[r.dimension]}</span></td>
     <td>${esc(r.feature_area)}</td><td class="f">${esc(r.finding)}</td><td class="f">${esc(r.our_action)}</td>
     <td>${st(stMap(r.our_status_group))}</td>
-    <td><a href="${esc(r.source_url)}" target="_blank" rel="noopener">Source ↗</a><br><span class="mono">${esc(r.source_date||"")}</span>${r.confidence==="unverified"?' <span class="unv">unverified</span>':""}</td></tr>`+
-    (open.has(r.id)?`<tr class="detail"><td colspan="8"><div class="dl"><div><h4>What users say</h4><p>${esc(r.public_reaction||"No public reaction captured.")}</p></div><div><h4>Psychology</h4><p>${esc(r.psychology||"—")}</p></div><div><h4>__PRODUCT__ code check</h4><p>${esc(r.our_status||"Not checked (not a gap row)")}</p></div><div><h4>Source</h4><p><a href="${esc(r.source_url)}" target="_blank" rel="noopener">${esc(r.source_url)}</a></p></div></div></td></tr>`:"")).join("");
+    <td><a href="${esc(safeUrl(r.source_url))}" target="_blank" rel="noopener">Source ↗</a><br><span class="mono">${esc(r.source_date||"")}</span>${r.confidence==="unverified"?' <span class="unv">unverified</span>':""}</td></tr>`+
+    (open.has(r.id)?`<tr class="detail"><td colspan="8"><div class="dl"><div><h4>What users say</h4><p>${esc(r.public_reaction||"No public reaction captured.")}</p></div><div><h4>Psychology</h4><p>${esc(r.psychology||"—")}</p></div><div><h4>__PRODUCT__ gap check</h4><p>${esc(r.our_status||"Not checked (not a gap row)")}</p></div><div><h4>Source</h4><p><a href="${esc(safeUrl(r.source_url))}" target="_blank" rel="noopener">${esc(r.source_url)}</a></p></div></div></td></tr>`:"")).join("");
 }
 document.addEventListener("click",e=>{
   const l=e.target.closest(".lens");if(l){lens=l.dataset.l;try{localStorage.setItem("ci-lens",lens)}catch(_){}render();$("#tablebox").scrollTop=0;return;}
