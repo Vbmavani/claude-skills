@@ -1,0 +1,142 @@
+<title>{{TITLE}}</title>
+<meta name="claude:viewport-fit-sides" content="cover">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Bricolage+Grotesque:opsz,wght@12..96,500;12..96,700&family=Source+Sans+3:ital,wght@0,400;0,600;0,700;1,400&family=JetBrains+Mono:wght@400;500&display=swap">
+<style>
+/* Layout: a verdict header, a sticky three-way switch, then one reading column that widens for tables. */
+:root {
+  --bg: #f2f5f7; --surface: #ffffff; --fg: #17242e; --muted: #566876; --line: #d4dde3;
+  --a: #0f6b78; --a-soft: #d9eef0; --b: #8a5a00; --b-soft: #f6ead0; --both: #3d4f9f; --both-soft: #e2e5f6;
+  --ok: #1b7a4b; --warn: #9a6400; --bad: #b3322c; --none: #566876;
+  --display: "Bricolage Grotesque", "Avenir Next", "Segoe UI", sans-serif;
+  --body: "Source Sans 3", "Segoe UI", system-ui, sans-serif;
+  --mono: "JetBrains Mono", ui-monospace, Menlo, monospace;
+}
+@media (prefers-color-scheme: dark) { :root:not([data-theme="light"]) {
+  --bg: #10181e; --surface: #18232b; --fg: #e6edf1; --muted: #9db0bc; --line: #2d3c47;
+  --a: #62c6d3; --a-soft: #15383e; --b: #e3b45c; --b-soft: #3b2e13; --both: #a4b1f4; --both-soft: #252c52;
+  --ok: #6fd3a0; --warn: #e6b866; --bad: #f19a93; --none: #9db0bc; color-scheme: dark;
+} }
+:root[data-theme="dark"] {
+  --bg: #10181e; --surface: #18232b; --fg: #e6edf1; --muted: #9db0bc; --line: #2d3c47;
+  --a: #62c6d3; --a-soft: #15383e; --b: #e3b45c; --b-soft: #3b2e13; --both: #a4b1f4; --both-soft: #252c52;
+  --ok: #6fd3a0; --warn: #e6b866; --bad: #f19a93; --none: #9db0bc; color-scheme: dark;
+}
+* { box-sizing: border-box; }
+body { background: var(--bg); color: var(--fg); font: 400 17px/1.55 var(--body); }
+body::before { content: ""; position: fixed; inset: 0 0 auto; height: env(safe-area-inset-top, 0px); z-index: 10; background: var(--bg); }
+.wrap { max-width: 1000px; margin: 0 auto; padding-left: max(16px, env(safe-area-inset-left, 0px)); padding-right: max(16px, env(safe-area-inset-right, 0px)); }
+header.top { padding-block: 40px 24px; }
+.eyebrow { font: 500 12.5px var(--mono); color: var(--muted); letter-spacing: .03em; }
+h1 { font: 700 clamp(30px, 5vw, 46px)/1.08 var(--display); margin: 10px 0 12px; text-wrap: balance; }
+.lede { font-size: 19px; max-width: 68ch; margin: 0; }
+.bar { position: sticky; top: env(safe-area-inset-top, 0px); z-index: 5; background: var(--bg); border-bottom: 1px solid var(--line); }
+.tabs { display: flex; gap: 6px; padding-block: 10px; flex-wrap: wrap; }
+.tab { font: 600 15.5px var(--body); color: var(--fg); background: transparent; border: 1px solid var(--line); border-radius: 6px; padding: 8px 14px; cursor: pointer; }
+.tab small { font: 400 13px var(--body); color: var(--muted); margin-left: 4px; }
+.tab[aria-selected="true"][data-k="session-a"] { background: var(--a-soft); border-color: var(--a); }
+.tab[aria-selected="true"][data-k="session-b"] { background: var(--b-soft); border-color: var(--b); }
+.tab[aria-selected="true"][data-k="combined"] { background: var(--both-soft); border-color: var(--both); }
+.tab:focus-visible, a:focus-visible { outline: 2px solid var(--both); outline-offset: 2px; }
+main { padding-block: 26px 70px; }
+.panel { min-width: 0; }
+.panel > h2:first-child, .report > h2:first-child { margin-top: 0; }
+h2 { font: 700 clamp(25px, 3.6vw, 32px)/1.15 var(--display); margin: 42px 0 12px; text-wrap: balance; }
+h3 { font: 700 21px/1.25 var(--display); margin: 34px 0 10px; text-wrap: balance; }
+h4 { font: 700 17.5px/1.3 var(--display); margin: 24px 0 8px; }
+p, ul, ol { max-width: 72ch; margin: 0 0 12px; }
+ul, ol { padding-left: 22px; }
+li { margin-bottom: 5px; }
+li ul { margin-top: 5px; margin-bottom: 0; }
+hr { border: 0; border-top: 1px solid var(--line); margin: 30px 0; }
+a { color: var(--both); }
+code { font: 400 .84em var(--mono); background: color-mix(in srgb, var(--line) 45%, transparent); padding: 1px 4px; border-radius: 3px; overflow-wrap: anywhere; }
+.tw { overflow-x: auto; margin: 14px 0 20px; border: 1px solid var(--line); border-radius: 6px; background: var(--surface); }
+table { border-collapse: collapse; width: 100%; font-size: 15px; line-height: 1.42; font-variant-numeric: tabular-nums; }
+th { text-align: left; font-weight: 700; background: color-mix(in srgb, var(--line) 35%, var(--surface)); white-space: nowrap; }
+th, td { padding: 8px 11px; border-bottom: 1px solid var(--line); vertical-align: top; min-width: 96px; }
+tbody tr:last-child td { border-bottom: 0; }
+.ev { display: inline-block; font: 500 10.5px/1.5 var(--mono); padding: 0 4px; border-radius: 3px; vertical-align: 1px; border: 1px solid currentColor; }
+.ev-M { color: var(--ok); } .ev-O { color: var(--warn); } .ev-E { color: var(--muted); }
+.st { font: 500 12.5px var(--mono); white-space: nowrap; }
+.st-ok { color: var(--ok); } .st-warn { color: var(--warn); } .st-bad { color: var(--bad); } .st-none { color: var(--none); }
+.win { font-weight: 700; white-space: nowrap; }
+.win.a { color: var(--a); } .win.b { color: var(--b); } .win.t { color: var(--muted); }
+.verdict { background: var(--surface); border: 1px solid var(--line); border-radius: 6px; padding: 20px 22px; margin-bottom: 8px; }
+.verdict h2 { margin: 0 0 8px; }
+.verdict p:last-child { margin-bottom: 0; }
+.srcline { font-size: 14.5px; color: var(--muted); margin-bottom: 20px; }
+.note { font-size: 15.5px; color: var(--muted); }
+.grid3 { display: grid; grid-template-columns: repeat(3, minmax(0, 1fr)); gap: 16px; }
+.grid3 > div { min-width: 0; }
+.grid3 h4 { margin-top: 0; }
+.grid3 ul { font-size: 15.5px; }
+@media (max-width: 760px) { .grid3 { grid-template-columns: 1fr; } }
+@media (max-width: 480px) { .tab small { display: none; } }
+</style>
+<style>
+.odds { display: grid; grid-template-columns: repeat(3, minmax(0, 1fr)); gap: 16px; margin: 16px 0 8px; }
+.odds > div { min-width: 0; background: var(--surface); border: 1px solid var(--line); border-radius: 6px; padding: 14px 16px; }
+.odds b { display: block; font: 700 32px/1.1 var(--display); font-variant-numeric: tabular-nums; }
+.odds span { font-size: 15px; color: var(--muted); }
+details { border-top: 1px solid var(--line); padding-block: 12px; }
+summary { font: 700 18px var(--display); cursor: pointer; }
+@media (max-width: 760px) { .odds { grid-template-columns: 1fr; } }
+</style><style>
+pre { overflow-x: auto; background: var(--surface); border: 1px solid var(--line); border-radius: 6px; padding: 12px; font-size: 14px; }
+pre code { background: none; padding: 0; overflow-wrap: normal; }
+</style>
+
+<header class="top wrap">
+  <div class="eyebrow">{{EYEBROW}}</div>
+  <h1>{{HEADING}}</h1>
+  <p class="lede">{{LEDE}}</p>
+</header>
+
+<div class="bar"><div class="wrap"><div class="tabs" role="tablist" aria-label="Report view">
+  <button class="tab" role="tab" id="t-session-a" data-k="session-a" aria-controls="session-a" aria-selected="false">{{LABEL_WITH}} <small>{{NOTE_WITH}}</small></button>
+  <button class="tab" role="tab" id="t-session-b" data-k="session-b" aria-controls="session-b" aria-selected="false">{{LABEL_WITHOUT}} <small>{{NOTE_WITHOUT}}</small></button>
+  <button class="tab" role="tab" id="t-combined" data-k="combined" aria-controls="combined" aria-selected="true">Combined <small>verdict and metrics</small></button>
+</div></div></div>
+
+<main class="wrap">
+<section class="panel report" id="session-a" role="tabpanel" aria-labelledby="t-session-a" hidden>
+<p class="srcline">Full output, unedited.</p>
+{{WITH}}
+</section>
+
+<section class="panel report" id="session-b" role="tabpanel" aria-labelledby="t-session-b" hidden>
+<p class="srcline">Full output, unedited.</p>
+{{WITHOUT}}
+</section>
+
+<section class="panel" id="combined" role="tabpanel" aria-labelledby="t-combined">
+{{COMBINED}}
+<h2>Full review</h2>
+<details><summary>Blind review</summary>
+{{REVIEW}}
+</details>
+</section>
+</main>
+
+<script>
+(function () {
+  var keys = ["session-a", "session-b", "combined"];
+  function show(key, scroll) {
+    keys.forEach(function (k) {
+      document.getElementById(k).hidden = k !== key;
+      document.getElementById("t-" + k).setAttribute("aria-selected", String(k === key));
+    });
+    if (scroll) {
+      var bar = document.querySelector(".bar");
+      window.scrollTo({ top: bar.offsetTop });
+    }
+  }
+  keys.forEach(function (k) {
+    document.getElementById("t-" + k).addEventListener("click", function () { show(k, true); });
+  });
+  var hash = location.hash.slice(1);
+  if (keys.indexOf(hash) !== -1) show(hash, false);
+})();
+</script>
