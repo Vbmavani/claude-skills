@@ -1,9 +1,9 @@
 ---
-name: instagram-feed-audit
-description: Audit a user's own Instagram feed against topics they choose, steer it with their own signals, then re-audit the same way and report before and after. Use when someone wants to improve, clean up, reset or retrain their Instagram feed, algorithm, Reels or Explore, wants less of some topic and more of another, or asks what Instagram is showing them, even if they don't say "audit".
+name: instagram-feed-improver
+description: Improve a user's own Instagram feed toward topics they choose. Audits the feed, steers it with their own signals, then re-audits the same way and reports before and after. Use when someone wants to improve, clean up, reset or retrain their Instagram feed, algorithm, Reels or Explore, wants less of some topic and more of another, or asks what Instagram is showing them, even if they don't say "audit".
 ---
 
-# Instagram Feed Audit
+# Instagram Feed Improver
 
 Measure the feed against the user's goal, change it using their own account signals, and measure again the same way. Instagram's ranking can't be edited, so this is curation of one account, and the honest result can be "no change yet".
 
