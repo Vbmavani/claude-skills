@@ -1,0 +1,1173 @@
+{
+ "title": "Mac Tracker Shootout",
+ "use_case": "Mac tracking tools",
+ "date": "2026-10-31",
+ "candidates_screened": 28,
+ "headline": "Screenpipe is the pick for tracking typing, clicks and screen",
+ "lede": "It is the only one of 15 ranked tools that can cover typed text, individual clicks and searchable screen content. It wins on capability, and its public evidence is thin.",
+ "fit_share": 0.7,
+ "criteria": [
+  {
+   "key": "typed",
+   "label": "Typed text",
+   "weight": 30,
+   "anchors": "Real text 10; behind a setting 8 to 9; on-screen text or word counts 5; keystroke counts 4; none 0"
+  },
+  {
+   "key": "clicks",
+   "label": "Mouse clicks",
+   "weight": 15,
+   "anchors": "Each event 10; counts with position 8; counts 6; activity level 2; none 0"
+  },
+  {
+   "key": "screen",
+   "label": "Screen capture",
+   "weight": 20,
+   "anchors": "Searchable capture 9 to 10; screenshots or frames 6 to 7; app, title, URL 4"
+  },
+  {
+   "key": "privacy",
+   "label": "Privacy",
+   "weight": 25,
+   "anchors": "Local, no cloud 10; optional cloud 8; default telemetry 7; account sync 5; vendor cloud 2 to 3"
+  },
+  {
+   "key": "solo",
+   "label": "Solo value",
+   "weight": 10,
+   "anchors": "Free and full 10; cheap single user 7 to 8; team product with solo route 6; server needed 4; seat minimum 1"
+  }
+ ],
+ "gates": [
+  {
+   "key": "solo",
+   "label": "One person can use it with no seat minimum or server"
+  },
+  {
+   "key": "coverage",
+   "label": "It documents typed, click and screen or activity signals"
+  }
+ ],
+ "uncertain_scores": {
+  "Screenpipe": {
+   "typed": 5,
+   "privacy": 3,
+   "solo": 4
+  }
+ },
+ "columns": [
+  {
+   "key": "typed",
+   "label": "Typed"
+  },
+  {
+   "key": "clicks",
+   "label": "Clicks"
+  },
+  {
+   "key": "screen",
+   "label": "Screen"
+  }
+ ],
+ "tools": [
+  {
+   "name": "Screenpipe",
+   "url": "https://github.com/screenpipe/screenpipe",
+   "category": "Screen recall",
+   "scores": {
+    "typed": 9,
+    "clicks": 10,
+    "screen": 10,
+    "privacy": 7,
+    "solo": 7
+   },
+   "gates": {
+    "solo": "pass",
+    "coverage": "pass"
+   },
+   "gate_note": "Passes both",
+   "capabilities": {
+    "typed": {
+     "text": "Real text, off by default?",
+     "level": 2
+    },
+    "clicks": {
+     "text": "Each click",
+     "level": 3
+    },
+    "screen": {
+     "text": "Searchable capture",
+     "level": 3
+    }
+   },
+   "price": "Free, limited history; $21/mo annual",
+   "storage": "Local; telemetry on",
+   "maintenance": "Active. app-v2.7.130, 28 Oct 2026",
+   "evidence": "Typed: Real text, off by default?. Clicks: Each click. Screen: Searchable capture. Data: Local; telemetry on. Price: Free, limited history; $21/mo annual.",
+   "ratings": [
+    {
+     "platform": "producthunt",
+     "label": "Product Hunt",
+     "rating": 5.0,
+     "count": 2,
+     "url": "https://github.com/screenpipe/screenpipe",
+     "verified": false
+    }
+   ],
+   "hn": {
+    "pos": 2,
+    "mix": 3,
+    "neg": 2
+   },
+   "praise": {
+    "text": "Context for agents",
+    "url": "https://news.ycombinator.com/item?id=49025107"
+   },
+   "complaint": {
+    "text": "Heat, RAM, trust",
+    "url": "https://news.ycombinator.com/item?id=49031269"
+   }
+  },
+  {
+   "name": "ActivityWatch",
+   "url": "https://docs.activitywatch.net/en/latest/faq.html",
+   "category": "Time tracker",
+   "scores": {
+    "typed": 4,
+    "clicks": 2,
+    "screen": 4,
+    "privacy": 10,
+    "solo": 10
+   },
+   "gates": {
+    "solo": "pass",
+    "coverage": "unverified"
+   },
+   "gate_note": "Coverage unverified, needs optional watcher",
+   "capabilities": {
+    "typed": {
+     "text": "Counts via add-on",
+     "level": 1
+    },
+    "clicks": {
+     "text": "Unclear",
+     "level": 1
+    },
+    "screen": {
+     "text": "App, title, URL only",
+     "level": 1
+    }
+   },
+   "price": "Free",
+   "storage": "Local only",
+   "maintenance": "Active. v0.14.1, 10 Oct 2026",
+   "evidence": "Typed: Counts via add-on. Clicks: Unclear. Screen: App, title, URL only. Data: Local only. Price: Free.",
+   "ratings": [
+    {
+     "platform": "producthunt",
+     "label": "Product Hunt",
+     "rating": 5.0,
+     "count": 11,
+     "url": "https://docs.activitywatch.net/en/latest/faq.html",
+     "verified": false
+    },
+    {
+     "platform": "alternativeto",
+     "label": "AlternativeTo",
+     "rating": 4.7,
+     "count": 73,
+     "url": "https://docs.activitywatch.net/en/latest/faq.html",
+     "verified": false
+    }
+   ],
+   "hn": {
+    "pos": 4,
+    "mix": 3,
+    "neg": 1
+   },
+   "praise": {
+    "text": "Local, useful for billing",
+    "url": "https://news.ycombinator.com/item?id=47322369"
+   },
+   "complaint": {
+    "text": "Fiddly",
+    "url": "https://news.ycombinator.com/item?id=45369996"
+   }
+  },
+  {
+   "name": "WhatPulse",
+   "url": "https://whatpulse.org/pricing",
+   "category": "Input counter",
+   "scores": {
+    "typed": 5,
+    "clicks": 8,
+    "screen": 4,
+    "privacy": 5,
+    "solo": 8
+   },
+   "gates": {
+    "solo": "pass",
+    "coverage": "pass"
+   },
+   "gate_note": "Passes both",
+   "capabilities": {
+    "typed": {
+     "text": "Word counts",
+     "level": 2
+    },
+    "clicks": {
+     "text": "Counts + heatmap",
+     "level": 2
+    },
+    "screen": {
+     "text": "App, title, URL only",
+     "level": 1
+    }
+   },
+   "price": "Free 7-day dashboard; Premium unconfirmed",
+   "storage": "WhatPulse account",
+   "maintenance": "Active. 7.0, 27 Oct 2026, third-party mirror",
+   "evidence": "Typed: Word counts. Clicks: Counts + heatmap. Screen: App, title, URL only. Data: WhatPulse account. Price: Free 7-day dashboard; Premium unconfirmed.",
+   "ratings": [
+    {
+     "platform": "capterra",
+     "label": "Capterra",
+     "rating": 5.0,
+     "count": 9,
+     "url": "https://whatpulse.org/pricing",
+     "verified": false
+    },
+    {
+     "platform": "trustpilot",
+     "label": "Trustpilot",
+     "rating": 4.0,
+     "count": 4,
+     "url": "https://whatpulse.org/pricing",
+     "verified": false
+    },
+    {
+     "platform": "alternativeto",
+     "label": "AlternativeTo",
+     "rating": 3.0,
+     "count": 3,
+     "url": "https://whatpulse.org/pricing",
+     "verified": false
+    }
+   ],
+   "hn": {
+    "pos": 0,
+    "mix": 0,
+    "neg": 1
+   },
+   "praise": "None found beyond ratings",
+   "complaint": {
+    "text": "Permissions and licence, one source",
+    "url": "https://news.ycombinator.com/item?id=47694187"
+   }
+  },
+  {
+   "name": "Time Doctor",
+   "url": "https://support.timedoctor.com/knowledge/how-does-keyboard-and-mouse-tracking-work-in-time-doctor",
+   "category": "Team suite",
+   "scores": {
+    "typed": 4,
+    "clicks": 6,
+    "screen": 7,
+    "privacy": 2,
+    "solo": 6
+   },
+   "gates": {
+    "solo": "pass",
+    "coverage": "pass"
+   },
+   "gate_note": "Passes both, team product",
+   "capabilities": {
+    "typed": {
+     "text": "Counts",
+     "level": 2
+    },
+    "clicks": {
+     "text": "Counts",
+     "level": 2
+    },
+    "screen": {
+     "text": "Screenshots",
+     "level": 2
+    }
+   },
+   "price": "About $6.70 to $16.70 per user/mo",
+   "storage": "Vendor cloud",
+   "maintenance": "Current macOS docs; no dated Mac release",
+   "evidence": "Typed: Counts. Clicks: Counts. Screen: Screenshots. Data: Vendor cloud. Price: About $6.70 to $16.70 per user/mo.",
+   "ratings": [
+    {
+     "platform": "g2",
+     "label": "G2",
+     "rating": 4.4,
+     "count": 498,
+     "url": "https://support.timedoctor.com/knowledge/how-does-keyboard-and-mouse-tracking-work-in-time-doctor",
+     "verified": false
+    },
+    {
+     "platform": "capterra",
+     "label": "Capterra",
+     "rating": 4.5,
+     "count": 547,
+     "url": "https://support.timedoctor.com/knowledge/how-does-keyboard-and-mouse-tracking-work-in-time-doctor",
+     "verified": false
+    },
+    {
+     "platform": "gartner",
+     "label": "Gartner",
+     "rating": 4.6,
+     "count": 10,
+     "url": "https://support.timedoctor.com/knowledge/how-does-keyboard-and-mouse-tracking-work-in-time-doctor",
+     "verified": false
+    },
+    {
+     "platform": "appstore",
+     "label": "iOS app",
+     "rating": 2.1,
+     "count": 10,
+     "url": "https://support.timedoctor.com/knowledge/how-does-keyboard-and-mouse-tracking-work-in-time-doctor",
+     "verified": true
+    }
+   ],
+   "hn": {
+    "pos": 1,
+    "mix": 0,
+    "neg": 0
+   },
+   "praise": {
+    "text": "Shows real coding hours",
+    "url": "https://news.ycombinator.com/item?id=43954101"
+   },
+   "complaint": {
+    "text": "Privacy concerns",
+    "url": "https://www.capterra.com/p/129984/Time-Doctor/reviews/Capterra___1070619/"
+   }
+  },
+  {
+   "name": "Teramind",
+   "url": "https://knowledge.teramind.co/en/articles/15262363-what-features-are-supported-in-windows-mac-and-linux",
+   "category": "Team suite",
+   "scores": {
+    "typed": 8,
+    "clicks": 0,
+    "screen": 9,
+    "privacy": 3,
+    "solo": 1
+   },
+   "gates": {
+    "solo": "fail",
+    "coverage": "unverified"
+   },
+   "gate_note": "Fails solo: five-seat minimum",
+   "capabilities": {
+    "typed": {
+     "text": "Real text, Mac limits",
+     "level": 2
+    },
+    "clicks": {
+     "text": "Not documented",
+     "level": 0
+    },
+    "screen": {
+     "text": "Screen recording + OCR",
+     "level": 3
+    }
+   },
+   "price": "Five seats, about $70/mo, unverified",
+   "storage": "Vendor cloud or on-prem",
+   "maintenance": "Mac agent 26.1, 20 Jan 2026",
+   "evidence": "Typed: Real text, Mac limits. Clicks: Not documented. Screen: Screen recording + OCR. Data: Vendor cloud or on-prem. Price: Five seats, about $70/mo, unverified.",
+   "ratings": [
+    {
+     "platform": "g2",
+     "label": "G2",
+     "rating": 4.6,
+     "count": 148,
+     "url": "https://knowledge.teramind.co/en/articles/15262363-what-features-are-supported-in-windows-mac-and-linux",
+     "verified": false
+    },
+    {
+     "platform": "capterra",
+     "label": "Capterra",
+     "rating": 4.7,
+     "count": 92,
+     "url": "https://knowledge.teramind.co/en/articles/15262363-what-features-are-supported-in-windows-mac-and-linux",
+     "verified": false
+    }
+   ],
+   "hn": {
+    "pos": 0,
+    "mix": 0,
+    "neg": 0
+   },
+   "praise": "Not found",
+   "complaint": {
+    "text": "Mac limits, competitor source",
+    "url": "https://www.worktime.com/blog/employee-monitoring/best-mac-employee-monitoring-software-tools"
+   }
+  },
+  {
+   "name": "Dayflow",
+   "url": "https://github.com/JerryZLiu/Dayflow",
+   "category": "Screen recall",
+   "scores": {
+    "typed": 3,
+    "clicks": 0,
+    "screen": 7,
+    "privacy": 8,
+    "solo": 10
+   },
+   "gates": {
+    "solo": "pass",
+    "coverage": "fail"
+   },
+   "gate_note": "Fails coverage: no typed or click signal",
+   "capabilities": {
+    "typed": {
+     "text": "AI reads frames",
+     "level": 1
+    },
+    "clicks": {
+     "text": "Not documented",
+     "level": 0
+    },
+    "screen": {
+     "text": "Frames + AI timeline",
+     "level": 2
+    }
+   },
+   "price": "Free; Pro $20/mo",
+   "storage": "Local; frames leave in cloud AI modes",
+   "maintenance": "Active. v2.7.5, 22 Oct 2026",
+   "evidence": "Typed: AI reads frames. Clicks: Not documented. Screen: Frames + AI timeline. Data: Local; frames leave in cloud AI modes. Price: Free; Pro $20/mo.",
+   "ratings": [],
+   "hn": {
+    "pos": 1,
+    "mix": 5,
+    "neg": 2
+   },
+   "praise": {
+    "text": "Local mode, measures work",
+    "url": "https://news.ycombinator.com/item?id=47638304"
+   },
+   "complaint": {
+    "text": "Slow or no first results",
+    "url": "https://news.ycombinator.com/item?id=45372262"
+   }
+  },
+  {
+   "name": "Pieces",
+   "url": "https://docs.pieces.app/products/core-dependencies/pieces-os/long-term-memory",
+   "category": "Screen recall",
+   "scores": {
+    "typed": 3,
+    "clicks": 0,
+    "screen": 7,
+    "privacy": 8,
+    "solo": 6
+   },
+   "gates": {
+    "solo": "pass",
+    "coverage": "fail"
+   },
+   "gate_note": "Fails coverage",
+   "capabilities": {
+    "typed": {
+     "text": "On-screen text only",
+     "level": 1
+    },
+    "clicks": {
+     "text": "Not documented",
+     "level": 0
+    },
+    "screen": {
+     "text": "Screen capture",
+     "level": 2
+    }
+   },
+   "price": "Pro $18.99/mo",
+   "storage": "Local, per docs",
+   "maintenance": "User active Apr 2026; no release date found",
+   "evidence": "Typed: On-screen text only. Clicks: Not documented. Screen: Screen capture. Data: Local, per docs. Price: Pro $18.99/mo.",
+   "ratings": [
+    {
+     "platform": "g2",
+     "label": "G2",
+     "rating": 4.5,
+     "count": 84,
+     "url": "https://docs.pieces.app/products/core-dependencies/pieces-os/long-term-memory",
+     "verified": false
+    },
+    {
+     "platform": "producthunt",
+     "label": "Product Hunt",
+     "rating": 4.7,
+     "count": 35,
+     "url": "https://docs.pieces.app/products/core-dependencies/pieces-os/long-term-memory",
+     "verified": false
+    }
+   ],
+   "hn": {
+    "pos": 1,
+    "mix": 0,
+    "neg": 0
+   },
+   "praise": {
+    "text": "Used for months",
+    "url": "https://news.ycombinator.com/item?id=47801913"
+   },
+   "complaint": "Not found"
+  },
+  {
+   "name": "Littlebird",
+   "url": "https://docs.littlebird.ai/docs/faq/",
+   "category": "Screen recall",
+   "scores": {
+    "typed": 5,
+    "clicks": 0,
+    "screen": 7,
+    "privacy": 2,
+    "solo": 7
+   },
+   "gates": {
+    "solo": "pass",
+    "coverage": "fail"
+   },
+   "gate_note": "Fails coverage",
+   "capabilities": {
+    "typed": {
+     "text": "On-screen text only",
+     "level": 1
+    },
+    "clicks": {
+     "text": "Not documented",
+     "level": 0
+    },
+    "screen": {
+     "text": "Window text",
+     "level": 2
+    }
+   },
+   "price": "$0; Plus $17/mo annual",
+   "storage": "AWS cloud",
+   "maintenance": "iOS companion updated 27 Oct 2026",
+   "evidence": "Typed: On-screen text only. Clicks: Not documented. Screen: Window text. Data: AWS cloud. Price: $0; Plus $17/mo annual.",
+   "ratings": [
+    {
+     "platform": "producthunt",
+     "label": "Product Hunt",
+     "rating": 5.0,
+     "count": 10,
+     "url": "https://docs.littlebird.ai/docs/faq/",
+     "verified": false
+    },
+    {
+     "platform": "appstore",
+     "label": "iOS app",
+     "rating": 4.32,
+     "count": 66,
+     "url": "https://docs.littlebird.ai/docs/faq/",
+     "verified": true
+    }
+   ],
+   "hn": {
+    "pos": 1,
+    "mix": 0,
+    "neg": 0
+   },
+   "praise": {
+    "text": "Needs no briefing",
+    "url": "https://news.ycombinator.com/item?id=47493173"
+   },
+   "complaint": {
+    "text": "Cloud storage, from non-users",
+    "url": "https://news.ycombinator.com/item?id=47494592"
+   }
+  },
+  {
+   "name": "Rize",
+   "url": "https://rize.io/pricing",
+   "category": "Time tracker",
+   "scores": {
+    "typed": 5,
+    "clicks": 0,
+    "screen": 6,
+    "privacy": 3,
+    "solo": 7
+   },
+   "gates": {
+    "solo": "pass",
+    "coverage": "fail"
+   },
+   "gate_note": "Fails coverage",
+   "capabilities": {
+    "typed": {
+     "text": "On-screen text only",
+     "level": 1
+    },
+    "clicks": {
+     "text": "None",
+     "level": 0
+    },
+    "screen": {
+     "text": "App, title, URL only",
+     "level": 1
+    }
+   },
+   "price": "$9.99 to $39.99/mo annual",
+   "storage": "AWS cloud",
+   "maintenance": "Cask 3.0.183; pricing page 13 Oct 2026",
+   "evidence": "Typed: On-screen text only. Clicks: None. Screen: App, title, URL only. Data: AWS cloud. Price: $9.99 to $39.99/mo annual.",
+   "ratings": [
+    {
+     "platform": "producthunt",
+     "label": "Product Hunt",
+     "rating": 5.0,
+     "count": 17,
+     "url": "https://rize.io/pricing",
+     "verified": false
+    }
+   ],
+   "hn": {
+    "pos": 0,
+    "mix": 0,
+    "neg": 1
+   },
+   "praise": "None first-hand",
+   "complaint": {
+    "text": "Rule-based categorisation, one source",
+    "url": "https://news.ycombinator.com/item?id=44512009"
+   }
+  },
+  {
+   "name": "Timing",
+   "url": "https://timingapp.com/help/faq",
+   "category": "Time tracker",
+   "scores": {
+    "typed": 0,
+    "clicks": 0,
+    "screen": 4,
+    "privacy": 8,
+    "solo": 7
+   },
+   "gates": {
+    "solo": "pass",
+    "coverage": "fail"
+   },
+   "gate_note": "Fails coverage",
+   "capabilities": {
+    "typed": {
+     "text": "None",
+     "level": 0
+    },
+    "clicks": {
+     "text": "None",
+     "level": 0
+    },
+    "screen": {
+     "text": "App, title, URL only",
+     "level": 1
+    }
+   },
+   "price": "About $9 to $16/mo; sources conflict",
+   "storage": "Local; optional sync",
+   "maintenance": "Active. 2026.6, 30 Oct 2026",
+   "evidence": "Typed: None. Clicks: None. Screen: App, title, URL only. Data: Local; optional sync. Price: About $9 to $16/mo; sources conflict.",
+   "ratings": [
+    {
+     "platform": "capterra",
+     "label": "Capterra",
+     "rating": 4.8,
+     "count": 140,
+     "url": "https://timingapp.com/help/faq",
+     "verified": false
+    }
+   ],
+   "hn": {
+    "pos": 0,
+    "mix": 0,
+    "neg": 0
+   },
+   "praise": {
+    "text": "Best on Mac (2023)",
+    "url": "https://news.ycombinator.com/item?id=36435615"
+   },
+   "complaint": {
+    "text": "Price (2023)",
+    "url": "https://news.ycombinator.com/item?id=34486441"
+   }
+  },
+  {
+   "name": "Hubstaff",
+   "url": "https://hubstaff.com/faq",
+   "category": "Team suite",
+   "scores": {
+    "typed": 1,
+    "clicks": 2,
+    "screen": 6,
+    "privacy": 2,
+    "solo": 6
+   },
+   "gates": {
+    "solo": "pass",
+    "coverage": "fail"
+   },
+   "gate_note": "Fails coverage: presence only",
+   "capabilities": {
+    "typed": {
+     "text": "Presence only",
+     "level": 1
+    },
+    "clicks": {
+     "text": "Activity level",
+     "level": 1
+    },
+    "screen": {
+     "text": "Screenshots",
+     "level": 2
+    }
+   },
+   "price": "Free one seat; paid from $4.99",
+   "storage": "Vendor cloud (assumed)",
+   "maintenance": "Current macOS docs; no dated Mac release",
+   "evidence": "Typed: Presence only. Clicks: Activity level. Screen: Screenshots. Data: Vendor cloud (assumed). Price: Free one seat; paid from $4.99.",
+   "ratings": [
+    {
+     "platform": "g2",
+     "label": "G2",
+     "rating": 4.4,
+     "count": 2336,
+     "url": "https://hubstaff.com/faq",
+     "verified": false
+    },
+    {
+     "platform": "capterra",
+     "label": "Capterra",
+     "rating": 4.5,
+     "count": 1613,
+     "url": "https://hubstaff.com/faq",
+     "verified": false
+    },
+    {
+     "platform": "trustpilot",
+     "label": "Trustpilot",
+     "rating": 2.6,
+     "count": 478,
+     "url": "https://hubstaff.com/faq",
+     "verified": false
+    },
+    {
+     "platform": "appstore",
+     "label": "iOS app",
+     "rating": 4.54,
+     "count": 1537,
+     "url": "https://hubstaff.com/faq",
+     "verified": true
+    }
+   ],
+   "hn": {
+    "pos": 1,
+    "mix": 0,
+    "neg": 0
+   },
+   "praise": {
+    "text": "Helped productivity",
+    "url": "https://news.ycombinator.com/item?id=42035340"
+   },
+   "complaint": {
+    "text": "Renewals and refunds, unconfirmed",
+    "url": "https://hackceleration.com/labs/review/hubstaff"
+   }
+  },
+  {
+   "name": "Timely Memory",
+   "url": "https://www.timely.com/help/handbook/privacy/what-is-captured-by-memory/",
+   "category": "Time tracker",
+   "scores": {
+    "typed": 0,
+    "clicks": 0,
+    "screen": 4,
+    "privacy": 3,
+    "solo": 6
+   },
+   "gates": {
+    "solo": "unverified",
+    "coverage": "fail"
+   },
+   "gate_note": "Fails coverage; no solo tier found",
+   "capabilities": {
+    "typed": {
+     "text": "None",
+     "level": 0
+    },
+    "clicks": {
+     "text": "Not documented",
+     "level": 0
+    },
+    "screen": {
+     "text": "App, title, URL only",
+     "level": 1
+    }
+   },
+   "price": "$9 to $28 per user/mo",
+   "storage": "Cloud",
+   "maintenance": "Help page 27 Oct 2026",
+   "evidence": "Typed: None. Clicks: Not documented. Screen: App, title, URL only. Data: Cloud. Price: $9 to $28 per user/mo.",
+   "ratings": [
+    {
+     "platform": "g2",
+     "label": "G2",
+     "rating": 4.8,
+     "count": 480,
+     "url": "https://www.timely.com/help/handbook/privacy/what-is-captured-by-memory/",
+     "verified": false
+    },
+    {
+     "platform": "capterra",
+     "label": "Capterra",
+     "rating": 4.7,
+     "count": 217,
+     "url": "https://www.timely.com/help/handbook/privacy/what-is-captured-by-memory/",
+     "verified": false
+    },
+    {
+     "platform": "appstore",
+     "label": "iOS app",
+     "rating": 3.0,
+     "count": 32,
+     "url": "https://www.timely.com/help/handbook/privacy/what-is-captured-by-memory/",
+     "verified": true
+    }
+   ],
+   "hn": {
+    "pos": 0,
+    "mix": 0,
+    "neg": 0
+   },
+   "praise": "Not found",
+   "complaint": {
+    "text": "AI misclassification",
+    "url": "https://www.capterra.com/p/131584/Timely/reviews/"
+   }
+  },
+  {
+   "name": "RescueTime",
+   "url": "https://help.rescuetime.com/article/257-enabling-website-tracking-on-macos",
+   "category": "Time tracker",
+   "scores": {
+    "typed": 0,
+    "clicks": 0,
+    "screen": 4,
+    "privacy": 3,
+    "solo": 8
+   },
+   "gates": {
+    "solo": "pass",
+    "coverage": "fail"
+   },
+   "gate_note": "Fails coverage",
+   "capabilities": {
+    "typed": {
+     "text": "Not documented",
+     "level": 0
+    },
+    "clicks": {
+     "text": "Not documented",
+     "level": 0
+    },
+    "screen": {
+     "text": "App, title, URL only",
+     "level": 1
+    }
+   },
+   "price": "$7 to $15/mo; free Lite",
+   "storage": "Cloud (inferred)",
+   "maintenance": "3.4.1.4, 27 Oct 2026, third-party tracker",
+   "evidence": "Typed: Not documented. Clicks: Not documented. Screen: App, title, URL only. Data: Cloud (inferred). Price: $7 to $15/mo; free Lite.",
+   "ratings": [
+    {
+     "platform": "g2",
+     "label": "G2",
+     "rating": 4.2,
+     "count": 93,
+     "url": "https://help.rescuetime.com/article/257-enabling-website-tracking-on-macos",
+     "verified": false
+    },
+    {
+     "platform": "capterra",
+     "label": "Capterra",
+     "rating": 4.6,
+     "count": 141,
+     "url": "https://help.rescuetime.com/article/257-enabling-website-tracking-on-macos",
+     "verified": false
+    },
+    {
+     "platform": "appstore",
+     "label": "iOS app",
+     "rating": 4.25,
+     "count": 4,
+     "url": "https://help.rescuetime.com/article/257-enabling-website-tracking-on-macos",
+     "verified": true
+    }
+   ],
+   "hn": {
+    "pos": 2,
+    "mix": 0,
+    "neg": 1
+   },
+   "praise": {
+    "text": "Builds time awareness",
+    "url": "https://news.ycombinator.com/item?id=42254360"
+   },
+   "complaint": {
+    "text": "Rule-based categorisation, one source",
+    "url": "https://news.ycombinator.com/item?id=44512009"
+   }
+  },
+  {
+   "name": "ActivTrak",
+   "url": "https://www.activtrak.com/pricing/",
+   "category": "Team suite",
+   "scores": {
+    "typed": 0,
+    "clicks": 0,
+    "screen": 5,
+    "privacy": 2,
+    "solo": 6
+   },
+   "gates": {
+    "solo": "pass",
+    "coverage": "fail"
+   },
+   "gate_note": "Fails coverage",
+   "capabilities": {
+    "typed": {
+     "text": "None",
+     "level": 0
+    },
+    "clicks": {
+     "text": "Not documented",
+     "level": 0
+    },
+    "screen": {
+     "text": "App/URL; shots add-on",
+     "level": 1
+    }
+   },
+   "price": "Free to 3 workers; $10 to $21 per worker/mo",
+   "storage": "Vendor cloud (assumed)",
+   "maintenance": "Lists macOS 16 Tahoe; no dated Mac release",
+   "evidence": "Typed: None. Clicks: Not documented. Screen: App/URL; shots add-on. Data: Vendor cloud (assumed). Price: Free to 3 workers; $10 to $21 per worker/mo.",
+   "ratings": [
+    {
+     "platform": "g2",
+     "label": "G2",
+     "rating": 4.3,
+     "count": 329,
+     "url": "https://www.activtrak.com/pricing/",
+     "verified": false
+    },
+    {
+     "platform": "capterra",
+     "label": "Capterra",
+     "rating": 4.5,
+     "count": 577,
+     "url": "https://www.activtrak.com/pricing/",
+     "verified": false
+    },
+    {
+     "platform": "gartner",
+     "label": "Gartner",
+     "rating": 4.4,
+     "count": 26,
+     "url": "https://www.activtrak.com/pricing/",
+     "verified": false
+    }
+   ],
+   "hn": {
+    "pos": 0,
+    "mix": 0,
+    "neg": 0
+   },
+   "praise": "Not found",
+   "complaint": {
+    "text": "No keystroke logging, by policy",
+    "url": "https://support.activtrak.com/hc/en-us/articles/360060260991"
+   }
+  },
+  {
+   "name": "ManicTime",
+   "url": "https://www.manictime.com/mac",
+   "category": "Time tracker",
+   "scores": {
+    "typed": 0,
+    "clicks": 0,
+    "screen": 3,
+    "privacy": 3,
+    "solo": 4
+   },
+   "gates": {
+    "solo": "unverified",
+    "coverage": "fail"
+   },
+   "gate_note": "Fails coverage; needs a server",
+   "capabilities": {
+    "typed": {
+     "text": "Not documented",
+     "level": 0
+    },
+    "clicks": {
+     "text": "Not documented",
+     "level": 0
+    },
+    "screen": {
+     "text": "Usage only",
+     "level": 1
+    }
+   },
+   "price": "Cloud Standard $7, period not stated",
+   "storage": "ManicTime Server",
+   "maintenance": "Mac client v2026.2.1; no date found",
+   "evidence": "Typed: Not documented. Clicks: Not documented. Screen: Usage only. Data: ManicTime Server. Price: Cloud Standard $7, period not stated.",
+   "ratings": [
+    {
+     "platform": "g2",
+     "label": "G2",
+     "rating": 4.3,
+     "count": 13,
+     "url": "https://www.manictime.com/mac",
+     "verified": false
+    },
+    {
+     "platform": "capterra",
+     "label": "Capterra",
+     "rating": 4.5,
+     "count": 22,
+     "url": "https://www.manictime.com/mac",
+     "verified": false
+    }
+   ],
+   "hn": {
+    "pos": 1,
+    "mix": 0,
+    "neg": 0
+   },
+   "praise": {
+    "text": "Apps, tags, screenshots",
+    "url": "https://news.ycombinator.com/item?id=42485586"
+   },
+   "complaint": {
+    "text": "A bit expensive (older)",
+    "url": "https://news.ycombinator.com/item?id=34917698"
+   }
+  },
+  {
+   "name": "Qbserve",
+   "pool_only": true,
+   "category": "Time tracker",
+   "scores": {
+    "typed": 0,
+    "clicks": 0,
+    "screen": 4,
+    "privacy": 9,
+    "solo": 8
+   },
+   "gates": {
+    "solo": "pass",
+    "coverage": "fail"
+   },
+   "ratings": [
+    {
+     "platform": "g2",
+     "rating": 4.5,
+     "count": 3,
+     "url": "https://qotoqot.com/qbserve/"
+    },
+    {
+     "platform": "capterra",
+     "rating": 4.9,
+     "count": 16,
+     "url": "https://qotoqot.com/qbserve/"
+    }
+   ],
+   "hn": {
+    "pos": 0,
+    "mix": 1,
+    "neg": 0
+   }
+  }
+ ],
+ "why": [
+  "Only Screenpipe combines keyboard, click and screen capture for one person.",
+  "Clicks are stored as individual events and screen text is searchable.",
+  "You can query it by local API, SQL or MCP."
+ ],
+ "case_against": "Hacker News comments split 2 positive, 3 mixed, 2 negative, with complaints about heat, RAM and a licence change.",
+ "alternative": "You treat cloud audio and default telemetry as disqualifying. ActivityWatch is then the pick.",
+ "checks": [
+  {
+   "title": "Audio.",
+   "body": "Confirm where transcription runs. Deepgram is a cloud option."
+  },
+  {
+   "title": "Typed words.",
+   "body": "Check the Capture keyboard setting, then search for a made-up test string under the input content type."
+  }
+ ],
+ "limits": [
+  "Reddit, X and YouTube sentiment could not be collected.",
+  "The sentiment sample is 32 first-hand Hacker News comments labelled by one model.",
+  "Most review-site ratings are unverified search snippets. App Store figures rate companion iOS apps.",
+  "Recording other people can carry consent duties, which were not researched."
+ ],
+ "excluded": [
+  {
+   "name": "Rewind / Limitless",
+   "url": "https://9to5mac.com/2025/12/05/rewind-limitless-meta-acquisition/",
+   "status": "Dead",
+   "why": "Capture disabled 19 Dec 2025"
+  },
+  {
+   "name": "Selfspy",
+   "url": "https://github.com/selfspy/selfspy",
+   "status": "Dead",
+   "why": "Last pushed in 2019 on Python 2.7"
+  },
+  {
+   "name": "Qbserve",
+   "url": "https://qotoqot.com/qbserve/",
+   "status": "Unproven",
+   "why": "No dated release found"
+  }
+ ],
+ "run_log": [
+  {
+   "tried": "Hacker News search",
+   "purpose": "First-hand sentiment",
+   "status": "ok",
+   "result": "32 comments"
+  },
+  {
+   "tried": "Reddit, direct and by search",
+   "purpose": "First-hand sentiment",
+   "status": "failed",
+   "result": "Refused"
+  },
+  {
+   "tried": "G2 and Capterra pages",
+   "purpose": "Verify ratings",
+   "status": "partial",
+   "result": "Blocked, search snippets used"
+  },
+  {
+   "tried": "Screenpipe health check",
+   "purpose": "Settle capture defaults",
+   "status": "ok",
+   "result": "Input tap live, keyboard storage unconfirmed"
+  }
+ ]
+}
