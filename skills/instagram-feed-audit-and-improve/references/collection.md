@@ -10,27 +10,39 @@ Save one JSONL file per run, with one line per item:
 {"surface": "home", "key": "stable id", "author": "", "caption": "", "audio": "", "suggested": false, "ad": false}
 ```
 
-`surface` is `home` or `reels`. Mark `ad` from the Sponsored label. `window` data is lost on navigation and reading long data replaces the page, so finish a surface before exporting it, and export it before moving on. Following, Search and Settings aren't items; put them straight in the audit file.
+`surface` is `home` or `reels`. Mark `ad` by the rules under each surface. `window` data is lost on navigation and reading long data replaces the page, so finish a surface before exporting it, and export it before moving on. Following, Search and Settings aren't items; put them straight in the audit file.
+
+## Parallel tabs
+
+Reads run in parallel by default: open one tab per surface (Home, Reels, and one for Search, Following and Settings), start each collector, then poll them in turn. Account actions are never parallel.
+
+Keep the layout the same in every run, and leave the window alone during a run. Check the window size in every tab, because it changes what loads. Background tabs throttle timers, so Reels takes longer: count steps, not minutes, and confirm that items are arriving in each tab within the first 30 seconds.
 
 ## Tool notes
 
 - `javascript_tool` calls time out around 45 seconds. Start an in-page async collector, store to `window`, and poll with short calls.
-- Tool output is cut at about 1,000 characters. To read long data, replace `document.body` with one `<article>` holding the text, then call `get_page_text`. Navigate away afterwards to restore the page.
+- Tool output is cut at about 1,000 characters. To read long data, replace `document.body` with one `<article>` holding the text, then call `get_page_text`. Navigate away afterwards to restore the page. `get_page_text` is the export; don't retype the data by hand.
 - Timers run slower with several tabs open: 90 Reels steps took about 15 minutes in four tabs. Use the same number of steps each time and report unique items.
 
 ## Home feed
 
 Read `article` elements, scroll about 650px every 1.5 seconds, for 110 scrolls. Key by the post's `/p/` or `/reel/` link if it's in the DOM, otherwise by author and the first caption text.
 
+Ads usually have no `Sponsored` text in the DOM. Mark a post as an ad if it has no `/p/` or `/reel/` link and no author link. In one live run the text check found none of 21 ads.
+
+Captions start with noise. Drop `Liked by` lines, which name other people, and repeated author names.
+
 Merge afterwards: Instagram re-renders posts and sometimes drops the "Suggested for you" label. Treat a post as suggested if any copy had the label.
 
 ## Reels
 
-90 steps at about 4 seconds each on `/reels/`. The URL holds the reel ID. Walk up from the most visible `video` until the text contains `Likes`, `Follow` or `more`. Scroll the largest scrollable `div` by 0.9 of the viewport.
+90 steps at about 4 seconds each on `/reels/`. The URL holds the reel ID. Start at the parent of the most visible `video` and walk up while the element holds exactly one video, keeping the highest one with text. The text can be 13 or more levels up, so don't cap the walk. Scroll the largest scrollable `div` by 0.9 of the viewport. Mute the video.
+
+A call-to-action line where the author should be (`Learn more`, `See details`, `Get quote`) marks an ad, and the real author is the next line. `Suggested` can't be read here, because nearly every reel shows Follow, so report it as not measured.
 
 ## Search
 
-Open `/explore/search/`, focus the input, and read the text after `Clear all`. Classify rows by type.
+Open `/explore/search/`, focus the input, and read the text after `Clear All`, matching case-insensitively. Classify rows by type.
 
 ## Following
 
@@ -42,7 +54,7 @@ Tiles usually have no text, and opening one jumps into the Reels player. Report 
 
 ## Settings
 
-Links are under `/accounts/settings/v2/`. On the web, Content preferences holds only Sensitive content, and Hidden Words covers comments and messages only.
+Links are under `/accounts/settings/v2/`. On the web, Content preferences holds Sensitive content and Content from accounts that you don't follow, and Hidden Words covers comments and messages only.
 
 ## Not interested
 
