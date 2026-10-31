@@ -1,0 +1,93 @@
+<title>{{TITLE}}</title>
+<meta name="claude:viewport-fit-sides" content="cover">
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Bricolage+Grotesque:wght@500;700&family=IBM+Plex+Sans:wght@400;500;600&family=IBM+Plex+Mono:wght@400;500&display=swap">
+<style>
+/* Layout: a debate ledger. Two facing columns, one row per round, verdict first. */
+:root {
+  --bg: #eef1f6; --surface: #fbfcfe; --fg: #18202e; --muted: #566175; --line: #cfd6e2;
+  --side-a: #a4360f; --side-a-soft: #f8e6dd; --side-b: #1c4fb8; --side-b-soft: #e0e8fa;
+  --display: "Bricolage Grotesque", "Avenir Next", system-ui, sans-serif;
+  --body: "IBM Plex Sans", system-ui, -apple-system, sans-serif;
+  --mono: "IBM Plex Mono", ui-monospace, Menlo, monospace;
+}
+@media (prefers-color-scheme: dark) { :root:not([data-theme="light"]) {
+  --bg: #121722; --surface: #1a2130; --fg: #e8ecf3; --muted: #a2adc0; --line: #323c4f;
+  --side-a: #f39a72; --side-a-soft: #3a2419; --side-b: #8fb0f7; --side-b-soft: #1d2a48; color-scheme: dark } }
+:root[data-theme="dark"] {
+  --bg: #121722; --surface: #1a2130; --fg: #e8ecf3; --muted: #a2adc0; --line: #323c4f;
+  --side-a: #f39a72; --side-a-soft: #3a2419; --side-b: #8fb0f7; --side-b-soft: #1d2a48; color-scheme: dark }
+body { background: var(--bg); color: var(--fg); font: 400 16px/1.55 var(--body);
+  padding-left: max(16px, env(safe-area-inset-left, 0px)); padding-right: max(16px, env(safe-area-inset-right, 0px)); padding-block: 40px 64px; }
+main { max-width: 1020px; margin: 0 auto; display: grid; gap: 44px; }
+h1, h2, h3, h4 { font-family: var(--display); text-wrap: balance; margin: 0; line-height: 1.2; }
+h1 { font-size: clamp(2rem, 6vw, 3.2rem); font-weight: 700; }
+h2 { font-size: 1.5rem; font-weight: 700; }
+h3 { font-size: 1.1rem; font-weight: 700; }
+h4 { font-size: .98rem; font-weight: 700; }
+p { margin: 0; } ul { margin: 0; padding-left: 1.15em; display: grid; gap: 6px; }
+a { color: inherit; text-underline-offset: 2px; overflow-wrap: anywhere; }
+section { display: grid; gap: 16px; min-width: 0; }
+.panel { background: var(--surface); border: 1px solid var(--line); border-radius: 6px; padding: 20px; display: grid; gap: 10px; min-width: 0; }
+.verdict { padding: 24px; }
+.conf { font: 500 .85rem var(--mono); color: var(--muted); }
+.big { font: 700 clamp(1.3rem, 3.5vw, 1.75rem)/1.25 var(--display); text-wrap: balance; }
+.verdict p, .note { max-width: 70ch; }
+.tablewrap { overflow-x: auto; background: var(--surface); border: 1px solid var(--line); border-radius: 6px; }
+table { border-collapse: collapse; width: 100%; min-width: 620px; font-variant-numeric: tabular-nums; }
+th, td { padding: 11px 14px; text-align: left; vertical-align: top; border-bottom: 1px solid var(--line); }
+tr:last-child td { border-bottom: 0; }
+th { font-size: .82rem; font-weight: 600; color: var(--muted); }
+td.score { font: 500 1.05rem var(--mono); white-space: nowrap; }
+.a-text { color: var(--side-a); } .b-text { color: var(--side-b); }
+.round { display: grid; gap: 10px; }
+.pair, .duo { display: grid; grid-template-columns: repeat(2, minmax(0, 1fr)); gap: 12px; }
+.side { padding: 16px; border-radius: 6px; display: grid; gap: 8px; align-content: start; min-width: 0; font-size: .95rem; }
+.side.a { background: var(--side-a-soft); } .side.b { background: var(--side-b-soft); }
+.who { font: 500 .78rem var(--mono); }
+.side.a .who { color: var(--side-a); } .side.b .who { color: var(--side-b); }
+.note { color: var(--muted); font-size: .95rem; }
+@media (max-width: 680px) { .pair, .duo { grid-template-columns: minmax(0, 1fr); } }
+</style>
+<main>
+<h1>{{QUESTION}}</h1>
+
+<section class="panel verdict" aria-label="Verdict">
+  <span class="conf">{{VERDICT_LABEL}} · judge's confidence {{CONFIDENCE}}%</span>
+  <p class="big">{{VERDICT}}</p>
+  <p>{{REMAINING_DISAGREEMENT}}</p>
+  <p><strong>Next step:</strong> {{NEXT_STEP}}</p>
+</section>
+
+<section>
+  <h2>Scorecard</h2>
+  <div class="tablewrap"><table>
+    <thead><tr><th scope="col">Side</th><th scope="col">Evidence</th><th scope="col">Reasoning</th><th scope="col">Honesty</th><th scope="col">Total</th><th scope="col">Judge's reason</th></tr></thead>
+    <tbody>
+{{SCORE_ROWS}}
+    </tbody>
+  </table></div>
+  {{NOTE}}
+</section>
+
+{{COACHING}}
+
+<section>
+  <h2>The debate</h2>
+{{ROUNDS}}
+</section>
+
+{{THIRD_VOICE}}
+
+<section>
+  <h2>What would change the verdict</h2>
+  <div class="panel">{{CHANGE_VERDICT}}</div>
+</section>
+
+<section>
+  <h2>Source check</h2>
+  <div class="duo">
+    <div class="panel"><h3>Checked by the judge</h3>{{SOURCES_CHECKED}}</div>
+    <div class="panel"><h3>Not checked</h3>{{SOURCES_UNCHECKED}}</div>
+  </div>
+</section>
+</main>

@@ -1162,12 +1162,6 @@
    "purpose": "Verify ratings",
    "status": "partial",
    "result": "Blocked, search snippets used"
-  },
-  {
-   "tried": "Screenpipe health check",
-   "purpose": "Settle capture defaults",
-   "status": "ok",
-   "result": "Input tap live, keyboard storage unconfirmed"
   }
  ]
 }

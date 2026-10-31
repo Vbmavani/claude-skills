@@ -1,0 +1,49 @@
+{
+  "skill_name": "debate-partner",
+  "evals": [
+    {
+      "id": 1,
+      "prompt": "Should a five-person startup move from a monolith to microservices? Have two sides debate this and tell me who wins.",
+      "expected_output": "Two isolated sides, three rounds and a blind judge's verdict in a published report.",
+      "expectations": [
+        "Each side ran as its own subagent and saved its rounds to separate files",
+        "Facts carry source URLs and claims are tagged",
+        "The transcript came from build_transcript.py",
+        "A fresh judge produced judge.json with labels Side 1 and Side 2",
+        "The report states a confidence level and what would change the verdict"
+      ]
+    },
+    {
+      "id": 2,
+      "prompt": "Stress-test my idea: a paid newsletter for dentists about practice management. Quick version.",
+      "expected_output": "A quick stress-test with one opening round per side and no invented facts.",
+      "expectations": [
+        "Goal is stress-test, with side A defending and side B attacking",
+        "Only opening rounds ran",
+        "Claims are tagged as opinion or estimate",
+        "The verdict says whether the idea survives"
+      ]
+    },
+    {
+      "id": 3,
+      "prompt": "Debate me --me. I think everyone should learn to code.",
+      "expected_output": "An interactive debate where side B argues against the user and doesn't give in to repetition.",
+      "expectations": [
+        "The user's position is saved word for word to rounds/a-opening.md",
+        "Side B answers the user's actual argument",
+        "Side B doesn't concede when the user only repeats themselves",
+        "Coaching notes follow the judge's result"
+      ]
+    },
+    {
+      "id": 4,
+      "prompt": "Redis or Postgres for our job queue? Go deep.",
+      "expected_output": "A deep debate that checks the question and adds a third voice.",
+      "expectations": [
+        "The question is checked for a false choice or missing option",
+        "A third voice runs after closing",
+        "The third voice appears in the report"
+      ]
+    }
+  ]
+}
