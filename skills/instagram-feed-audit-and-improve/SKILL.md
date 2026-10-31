@@ -50,14 +50,14 @@ Search the web for related terms to build the `on_goal` and `off_goal_examples` 
 
 ## Audit steps
 
-1. **Collect.** Follow `references/collection.md`, one JSONL file per run. Use the same number of tabs in every run.
+1. **Collect.** Follow `references/collection.md`, one JSONL file per run. Read surfaces in parallel, one tab each, and use the same tab layout in every run.
 2. **Rate.** Run Compare blind (below) on this run alone.
 3. **Report.** Fill `assets/audit-template.md` from the score output and save it. Scrolling and watching are account activity, so say an audit isn't perfectly neutral.
 
 ## Improve steps
 
 1. **Phone step.** Ask the user to open Your Algorithm in the app and set their topics. It's the most direct control. See `references/signals.md`.
-2. **Not interested.** One action at a time, in one tab, up to 30 clicks in a session, on off-goal suggested posts. Follow `references/collection.md`.
+2. **Not interested.** One action at a time, in one tab, never in parallel, up to 30 clicks in a session, on off-goal suggested posts. Follow `references/collection.md`.
 3. **Reels.** Run the Reels watching pattern in `references/collection.md`.
 4. **Following.** If off-goal accounts are clear from the Following sample, offer an unfollow list. Skip anything on the Keep list or anything you aren't sure of.
 5. **Log** every action in the template's Actions table, including ones that failed.
