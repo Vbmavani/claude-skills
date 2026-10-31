@@ -1,0 +1,15 @@
+[
+  {"query": "Argue against my plan to quit my job and go freelance", "should_trigger": true},
+  {"query": "Play devil's advocate on this pricing strategy", "should_trigger": true},
+  {"query": "Can you pressure-test this startup idea for me?", "should_trigger": true},
+  {"query": "Have two agents fight over whether we should use GraphQL or REST", "should_trigger": true},
+  {"query": "Give me both sides on remote work and tell me which is stronger", "should_trigger": true},
+  {"query": "Debate me on this", "should_trigger": true},
+  {"query": "Poke holes in my business plan", "should_trigger": true},
+  {"query": "Compare this skill with plain Claude and tell me if it's worth it", "should_trigger": false},
+  {"query": "What's the difference between Redis and Postgres?", "should_trigger": false},
+  {"query": "Review this pull request for bugs", "should_trigger": false},
+  {"query": "Summarize the 2024 presidential debate transcript", "should_trigger": false},
+  {"query": "Write a blog post about remote work", "should_trigger": false},
+  {"query": "Fix the argument parsing in this script", "should_trigger": false}
+]
