@@ -1,0 +1,183 @@
+<title>__TITLE__</title>
+<meta name="claude:viewport-fit-sides" content="cover">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Bricolage+Grotesque:opsz,wght@12..96,500;12..96,700&family=Atkinson+Hyperlegible:ital,wght@0,400;0,700;1,400&family=IBM+Plex+Mono:wght@400;500&display=swap">
+<style>
+/* Layout: a verdict first, then a live scoring bench the reader can re-weight, then the evidence and its limits. */
+:root{
+  --bg:#EDF1F3; --panel:#FFFFFF; --panel-2:#E2E8EC; --fg:#15222B; --muted:#51626E; --rule:#C8D2D9;
+  --accent:#0B5F8A; --accent-soft:#D5E8F2; --rec:#C22F3B;
+  --good:#1D7350; --good-soft:#D9EFE4; --warn:#8A5A00; --warn-soft:#F6EAC9; --bad:#A3323C; --bad-soft:#F7DFE0;
+  --display:"Bricolage Grotesque","Avenir Next",system-ui,sans-serif;
+  --body:"Atkinson Hyperlegible",-apple-system,"Segoe UI",sans-serif;
+  --mono:"IBM Plex Mono",ui-monospace,Menlo,monospace;
+}
+@media (prefers-color-scheme:dark){:root:not([data-theme="light"]){
+  --bg:#10181E; --panel:#18232B; --panel-2:#22303A; --fg:#E7EEF2; --muted:#9FB0BB; --rule:#30414D;
+  --accent:#6CC0EA; --accent-soft:#17384A; --rec:#F0737D;
+  --good:#6FD0A4; --good-soft:#17382B; --warn:#E8BE62; --warn-soft:#3B2E10; --bad:#F2929A; --bad-soft:#40201F; color-scheme:dark}}
+:root[data-theme="dark"]{
+  --bg:#10181E; --panel:#18232B; --panel-2:#22303A; --fg:#E7EEF2; --muted:#9FB0BB; --rule:#30414D;
+  --accent:#6CC0EA; --accent-soft:#17384A; --rec:#F0737D;
+  --good:#6FD0A4; --good-soft:#17382B; --warn:#E8BE62; --warn-soft:#3B2E10; --bad:#F2929A; --bad-soft:#40201F; color-scheme:dark}
+*{box-sizing:border-box}
+body{background:var(--bg);color:var(--fg);font-family:var(--body);font-size:16px;line-height:1.55}
+.wrap{max-width:1180px;margin:0 auto;padding-block:40px 72px;padding-left:max(16px,env(safe-area-inset-left,0px));padding-right:max(16px,env(safe-area-inset-right,0px));display:grid;grid-template-columns:minmax(0,1fr);gap:56px}
+a{color:var(--accent)}
+a:focus-visible,button:focus-visible,input:focus-visible,select:focus-visible{outline:2px solid var(--accent);outline-offset:2px}
+h1,h2,h3{font-family:var(--display);font-weight:700;line-height:1.12;text-wrap:balance;margin:0}
+h1{font-size:clamp(2.1rem,5.4vw,3.6rem);letter-spacing:-.02em;max-width:18ch}
+h2{font-size:clamp(1.45rem,3vw,2rem);letter-spacing:-.01em}
+h3{font-size:1.1rem}
+p{margin:0;max-width:70ch}
+.stack{display:grid;gap:16px;min-width:0}
+.eyebrow{font-family:var(--mono);font-size:.76rem;letter-spacing:.07em;text-transform:uppercase;color:var(--muted);display:flex;align-items:center;gap:8px}
+.dot{width:9px;height:9px;border-radius:50%;background:var(--rec);flex:none}
+@media (prefers-reduced-motion:no-preference){.dot{animation:pulse 2.4s ease-in-out infinite}@keyframes pulse{50%{opacity:.35}}}
+.lede{font-size:1.15rem;color:var(--muted)}
+.hero{display:grid;grid-template-columns:minmax(0,1.5fr) minmax(0,1fr);gap:40px;align-items:end}
+.score-card{border-left:3px solid var(--accent);padding-left:20px;display:grid;gap:8px}
+.big{font-family:var(--display);font-weight:700;font-size:4rem;line-height:1;font-variant-numeric:tabular-nums}
+.big small{font-size:1.2rem;color:var(--muted);font-weight:500}
+.kv{display:grid;grid-template-columns:auto 1fr;gap:2px 16px;font-family:var(--mono);font-size:.84rem;font-variant-numeric:tabular-nums}
+.kv dt{color:var(--muted)} .kv dd{margin:0}
+.two{display:grid;grid-template-columns:minmax(0,1fr) minmax(0,1fr);gap:32px;align-items:start}
+ul.plain{margin:0;padding-left:20px;display:grid;gap:8px;max-width:70ch}
+.check{background:var(--panel);border:1px solid var(--rule);border-radius:6px;padding:20px;display:grid;gap:10px}
+.check ol{margin:0;padding-left:20px;display:grid;gap:10px}
+.bench{display:grid;grid-template-columns:minmax(0,300px) minmax(0,1fr);gap:32px;align-items:start}
+.controls{display:grid;gap:14px;background:var(--panel-2);padding:20px;border-radius:6px}
+.ctl{display:grid;grid-template-columns:1fr auto;gap:2px 8px;font-size:.92rem}
+.ctl input{grid-column:1/-1;width:100%;accent-color:var(--accent)}
+.ctl output{font-family:var(--mono);font-size:.84rem;font-variant-numeric:tabular-nums}
+.ctl-title{font-family:var(--mono);font-size:.74rem;letter-spacing:.07em;text-transform:uppercase;color:var(--muted)}
+button{font:inherit;color:inherit;cursor:pointer}
+.btn{border:1px solid var(--rule);background:var(--panel);border-radius:4px;padding:6px 12px;font-size:.9rem}
+.btn[aria-pressed="true"]{background:var(--accent);border-color:var(--accent);color:var(--bg)}
+.chips{display:flex;flex-wrap:wrap;gap:8px}
+.verdict-line{font-size:.95rem}
+.chart-box{min-width:0;overflow-x:auto;position:relative}
+.chart-box svg{display:block;width:100%;min-width:640px;height:auto}
+.tip{position:absolute;pointer-events:none;background:var(--fg);color:var(--bg);padding:8px 10px;border-radius:4px;font-size:.84rem;max-width:230px;line-height:1.35;z-index:3}
+.legend{display:flex;flex-wrap:wrap;gap:18px;font-size:.86rem;color:var(--muted)}
+.legend span{display:inline-flex;gap:6px;align-items:center}
+.swatch{width:11px;height:11px;border-radius:50%;display:inline-block}
+.table-wrap{overflow-x:auto;background:var(--panel);border:1px solid var(--rule);border-radius:6px}
+table{border-collapse:collapse;width:100%;font-size:.92rem}
+th,td{padding:10px 12px;text-align:left;vertical-align:top;border-bottom:1px solid var(--rule)}
+thead th{font-family:var(--mono);font-size:.72rem;letter-spacing:.05em;text-transform:uppercase;color:var(--muted);font-weight:500;white-space:nowrap}
+th button{background:none;border:0;padding:0;font:inherit;letter-spacing:inherit;text-transform:inherit;color:inherit;text-decoration:underline dotted}
+tr:last-child td{border-bottom:0}
+#board{min-width:980px}
+.num{font-family:var(--mono);font-variant-numeric:tabular-nums;text-align:right;white-space:nowrap}
+th.num{text-align:right}
+.total{font-weight:500;font-size:1.02rem}
+.tool-btn{background:none;border:0;padding:0;font-weight:700;text-align:left;color:var(--fg)}
+.tool-btn::after{content:" +";color:var(--muted);font-weight:400}
+.tool-btn[aria-expanded="true"]::after{content:" −"}
+.sub{color:var(--muted);font-size:.8rem;display:block}
+.pill{display:inline-block;font-family:var(--mono);font-size:.72rem;padding:1px 6px;border-radius:3px;white-space:nowrap;margin:0 3px 3px 0}
+.lv3{background:var(--good-soft);color:var(--good)} .lv2{background:var(--warn-soft);color:var(--warn)} .lv1{background:var(--panel-2);color:var(--muted)} .lv0{background:var(--bad-soft);color:var(--bad)}
+.gate-fail{color:var(--bad)} .gate-pass{color:var(--good)}
+.hn{display:flex;height:8px;width:72px;gap:2px;margin-top:4px}
+.hn i{display:block;height:100%}
+.hn .p{background:var(--good)} .hn .m{background:var(--warn)} .hn .n{background:var(--bad)}
+.detail td{background:var(--panel-2)}
+.detail-grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(220px,1fr));gap:16px;max-width:1000px}
+.detail-grid b{display:block;font-family:var(--mono);font-size:.72rem;letter-spacing:.05em;text-transform:uppercase;color:var(--muted);font-weight:500}
+.note{font-size:.88rem;color:var(--muted);max-width:80ch}
+tr.top td{background:var(--accent-soft)}
+.status-ok{color:var(--good)} .status-partial{color:var(--warn)} .status-failed{color:var(--bad)}
+.tiles{display:grid;grid-template-columns:repeat(auto-fit,minmax(150px,1fr));gap:1px;background:var(--rule);border:1px solid var(--rule);border-radius:6px;overflow:hidden}
+.tile{background:var(--panel);padding:14px 16px;min-width:0}
+.tile-n{font-family:var(--display);font-weight:700;font-size:1.7rem;line-height:1.1;font-variant-numeric:tabular-nums;overflow-wrap:anywhere}
+.tile-l{font-size:.84rem;color:var(--muted)}
+.extra{display:grid;gap:12px;min-width:0}
+.opt td:first-child{font-weight:700}
+.opt{min-width:760px}
+@media (max-width:860px){.hero,.two,.bench{grid-template-columns:minmax(0,1fr)}.big{font-size:3.2rem}}
+</style>
+<main class="wrap" id="app"></main>
+<script>
+const D=__DATA__;
+const esc=s=>String(s==null?'':s).replace(/[&<>"']/g,c=>({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;',"'":'&#39;'}[c]));
+const safe=u=>/^https?:\/\//i.test(u||'')?esc(u):'';
+const link=(txt,u)=>safe(u)?`<a href="${safe(u)}">${esc(txt)}</a>`:esc(txt);
+const ref=o=>typeof o==='string'?esc(o):link(o.text,o.url);
+const $=id=>document.getElementById(id);
+const crit=D.criteria, cols=D.columns||[], share0=Math.round((D.fit_share??.7)*100);
+const open=new Set();let sortBy='rank',cat='All';
+const cats=['All',...new Set(D.tools.map(t=>t.category).filter(Boolean))];
+const winner=D.tools[0], sen=D.sensitivity;
+const para=x=>`<li>${ref(x)}</li>`;
+const table=(heads,rows)=>`<div class="table-wrap"><table class="opt"><thead><tr>${heads.map(h=>`<th>${esc(h)}</th>`).join('')}</tr></thead><tbody>${rows.join('')}</tbody></table></div>`;
+function numbersSection(){const c=D.scorecard,m=D.run_metrics,f=D.fact_check,r=D.review,x=D.changes;
+  const tile=(n,l)=>`<div class="tile"><div class="tile-n">${esc(n)}</div><div class="tile-l">${esc(l)}</div></div>`;
+  const measured=[tile(c.candidates,'tools screened'),tile(`${c.pass_gates}/${c.ranked}`,'pass every must-have'),tile(c.reviews_behind_ratings.toLocaleString('en-US'),`reviews behind ${c.ratings} ratings`),tile(`${c.ratings_verified_pct}%`,'ratings verified live'),tile(c.first_hand_comments,'first-hand tool mentions'),tile(`${c.steps_ok}/${c.steps_tried}`,'research steps worked')];
+  if(f){const n=(f.supported||0)+(f.partly||0)+(f.unsupported||0)+(f.unavailable||0);measured.push(tile(`${f.supported||0}/${n}`,'claims fact-checked as supported'))}
+  if(m){if(m.minutes!=null)measured.push(tile(m.minutes,'minutes'));if(m.web_calls!=null)measured.push(tile(m.web_calls,'web calls'));if(m.total_tokens!=null)measured.push(tile(m.total_tokens.toLocaleString('en-US'),'total tokens, cache included'))}
+  const judged=[tile(c.winner_total.toFixed(2),'winner total /10'),tile(c.winner_gap==null?'none':c.winner_gap.toFixed(2),'lead over runner-up'),tile(`${c.winner_stability_pct}%`,'weight tests won'),tile(`${c.evidence_strength}/100`,'evidence strength')];
+  if(r)judged.push(tile(r.mean_gap.toFixed(2),'mean fit gap, blind reviewer'));
+  const changes=x?`<h3>Since the last run (${esc(x.previous_date)})</h3><p class="note">${esc(x.summary)}</p>`+table(['Tool','Rank','Total','Public','Note'],x.rows.map(y=>`<tr><td>${esc(y.tool)}</td><td class="num">${esc(y.rank)}</td><td class="num">${esc(y.total)}</td><td class="num">${esc(y.public)}</td><td>${esc(y.note)}</td></tr>`)):'';
+  return `<section class="stack"><div class="eyebrow">The numbers</div><h2>This run at a glance</h2><div class="ctl-title">Measured counts</div><div class="tiles">${measured.join('')}</div><div class="ctl-title">Judgement scores</div><div class="tiles">${judged.join('')}</div>${changes}</section>`}
+$('app').innerHTML=`
+<header class="hero"><div class="stack"><div class="eyebrow"><i class="dot"></i>${esc(D.use_case)} · checked ${esc(D.date)}</div><h1>${esc(D.headline)}</h1><p class="lede">${esc(D.lede)}</p></div>
+<div class="score-card"><div class="big">${winner.total.toFixed(2)}<small> / 10 total</small></div><dl class="kv"><dt>Pick</dt><dd>${esc(winner.name)}</dd><dt>Use-case fit</dt><dd>${winner.fit.toFixed(2)}</dd><dt>Public feedback</dt><dd>${winner.public==null?'none found':winner.public.toFixed(2)}, ${esc(winner.confidence.toLowerCase())} confidence</dd>${D.tools[1]?`<dt>Runner-up</dt><dd>${esc(D.tools[1].name)} ${D.tools[1].total.toFixed(2)}</dd>`:''}<dt>Weight tests won</dt><dd>${sen.wins[winner.name]||0} of ${sen.runs} at ±20%</dd></dl></div></header>
+${numbersSection()}
+<section class="two"><div class="stack"><h2>Why ${esc(winner.name)}</h2><ul class="plain">${D.why.map(para).join('')}</ul><p class="note"><strong>The case against it:</strong> ${esc(D.case_against)}</p>${D.alternative?`<p class="note"><strong>Pick something else if:</strong> ${esc(D.alternative)}</p>`:''}</div>
+${D.checks&&D.checks.length?`<div class="check"><h3>Check before you commit</h3><ol>${D.checks.map(c=>`<li><strong>${esc(c.title)}</strong> ${esc(c.body)}</li>`).join('')}</ol></div>`:`<div class="check"><h3>Check before you commit</h3><p class="note">No hands-on check was run for this comparison. Try ${esc(winner.name)} on real work first.</p></div>`}</section>
+<section class="stack"><div class="eyebrow">Scoring bench</div><h2>Change the weights and watch the ranking move</h2><div class="bench"><div class="controls" id="controls">
+<div class="ctl"><label for="w-fit">Fit share of total</label><output id="o-fit" for="w-fit"></output><input id="w-fit" type="range" min="0" max="100" step="5" value="${share0}"></div><div class="ctl-title">Inside fit (relative)</div>
+${crit.map(c=>`<div class="ctl"><label for="w-${esc(c.key)}">${esc(c.label)}</label><output id="o-${esc(c.key)}" for="w-${esc(c.key)}"></output><input id="w-${esc(c.key)}" type="range" min="0" max="60" step="5" value="${+c.weight}"></div>`).join('')}
+<button class="btn" id="reset" type="button">Reset weights</button></div>
+<div class="stack"><p class="verdict-line" id="verdict" aria-live="polite"></p><div class="chart-box" id="chart-box"><div class="tip" id="tip" hidden></div><svg id="scatter" viewBox="0 0 860 420" role="img" aria-labelledby="fit-public-title fit-public-desc"><title id="fit-public-title">Use-case fit against public feedback</title><desc id="fit-public-desc">Each tool plotted by fit score and public feedback score.</desc></svg></div>
+<div class="legend"><span><i class="swatch" style="background:var(--accent)"></i>Top pick now</span><span><i class="swatch" style="background:var(--fg)"></i>Passes must-haves</span><span><i class="swatch" style="border:1.5px solid var(--muted)"></i>Fails a must-have</span></div><p class="note" id="axis-note"></p></div></div></section>
+<section class="stack"><div class="eyebrow">Top ${D.tools.length}</div><h2>What each tool really does</h2><div class="chips" id="filters" role="group" aria-label="Filter by category">${cats.map(c=>`<button type="button" class="btn" data-cat="${esc(c)}" aria-pressed="${c==='All'}">${esc(c)}</button>`).join('')}</div>
+<div class="table-wrap"><table id="board"><thead><tr><th>Rank</th><th>Tool</th><th class="num"><button type="button" data-sort="rank">Total</button></th><th class="num"><button type="button" data-sort="fit">Fit</button></th><th class="num"><button type="button" data-sort="public">Public /10</button></th>${cols.map(c=>`<th>${esc(c.label)}</th>`).join('')}<th>Price</th><th>Data lives</th><th>HN + ~ −</th></tr></thead><tbody id="rows"></tbody></table></div>
+<p class="note">Tools that fail a must-have rank below those that pass, even with a higher total. An equals sign marks a tie, a gap under 0.5 from the band's leader. Select a tool name for ratings, praise, complaints and sources.</p></section>
+<section class="two"><div class="stack"><h2>How the scores work</h2><p><strong>Total</strong> = ${share0}% fit + ${100-share0}% public feedback. <strong>Fit</strong> weighs ${crit.map(c=>`${esc(c.label.toLowerCase())} ${+c.weight}`).join(', ')}, each scored 0 to 10.</p><div class="table-wrap"><table class="opt" style="min-width:0"><thead><tr><th>Criterion</th><th>Anchors</th></tr></thead><tbody>${crit.map(c=>`<tr><td>${esc(c.label)}</td><td>${esc(c.anchors)}</td></tr>`).join('')}</tbody></table></div>
+<p><strong>Public feedback</strong> pulls each rating toward its platform average when reviews are few, then combines sources: G2 and Capterra as one family 35%, Hacker News 30%, AlternativeTo 10%, Product Hunt 10%, the rest 5% each. A missing source is dropped, never counted as zero.</p>${(D.gates||[]).length?`<p><strong>Must-haves:</strong> ${D.gates.map(g=>esc(g.label)).join('; ')}.</p>`:''}
+<p class="note">Weights and fit scores are one analyst's judgement. ${sen.flips.length?'The winner changes when: '+esc(sen.flips.join('; '))+'.':'No single weight change flipped the winner.'}</p></div>
+<div class="stack"><h2>How far to trust this</h2><ul class="plain">${D.limits.map(para).join('')}</ul></div></section>
+${(D.excluded||[]).length?`<section class="stack"><div class="eyebrow">Left out on purpose</div><h2>Dead tools and near misses</h2>${table(['Tool','Status','Why it is out'],D.excluded.map(x=>`<tr><td>${link(x.name,x.url)}</td><td>${esc(x.status)}</td><td>${esc(x.why)}</td></tr>`))}</section>`:''}
+${(D.extra_tables||[]).map(x=>`<section class="extra"><h2>${esc(x.title)}</h2>${x.intro?`<p>${esc(x.intro)}</p>`:''}${table(x.columns,x.rows.map(r=>`<tr>${r.map(c=>`<td>${ref(c)}</td>`).join('')}</tr>`))}${x.note?`<p class="note">${esc(x.note)}</p>`:''}</section>`).join('')}
+<section class="stack"><div class="eyebrow">Run log</div><h2>What was tried</h2>${table(['#','What was tried','Purpose','Status','Result'],D.run_log.map((r,i)=>`<tr><td>${i+1}</td><td>${esc(r.tried)}</td><td>${esc(r.purpose)}</td><td class="status-${esc(r.status)}">${esc(r.status)}</td><td>${esc(r.result)}</td></tr>`))}</section>`;
+const keys=crit.map(c=>c.key), defaults=Object.fromEntries(crit.map(c=>[c.key,c.weight]));
+function weights(){const w=keys.map(k=>+$('w-'+k).value),sum=w.reduce((a,b)=>a+b,0)||1;return{share:+$('w-fit').value/100,w:w.map(x=>x/sum)}}
+function compute(){const{share,w}=weights();
+  const list=D.tools.map(t=>{const fit=keys.reduce((a,k,i)=>a+t.scores[k]*w[i],0);return{...t,fit,total:t.public==null?fit:share*fit+(1-share)*t.public}});
+  list.sort((a,b)=>b.tier-a.tier||b.total-a.total);
+  let leader=null,start=0;list.forEach((t,i)=>{if(!leader||leader.tier!==t.tier||leader.total-t.total>=.5){leader=t;start=i+1}t.rank=start});
+  list.forEach(t=>t.tied=list.filter(o=>o.rank===t.rank).length>1);return list}
+const pill=c=>c?`<span class="pill lv${Math.max(0,Math.min(3,+c.level||0))}">${esc(c.text)}</span>`:'<span class="pill lv0">Unknown</span>';
+function hnBar(h){h=h||{};const p=h.pos||0,m=h.mix||0,n=h.neg||0;if(!(p+m+n))return '<span class="sub">0 comments</span>';
+  return `<span class="num" style="text-align:left">${p} ${m} ${n}</span><div class="hn" role="img" aria-label="${p} positive, ${m} mixed, ${n} negative">${p?`<i class="p" style="flex:${p}"></i>`:''}${m?`<i class="m" style="flex:${m}"></i>`:''}${n?`<i class="n" style="flex:${n}"></i>`:''}</div>`}
+const ratingText=t=>(t.ratings||[]).length?t.ratings.map(r=>link(`${r.label||r.platform} ${r.rating}${(r.scale&&r.scale!==5)?'/'+r.scale:''} (${(+r.count).toLocaleString('en-US')})${r.verified?'':', snippet'}`,r.url)).join('; '):'None found';
+function renderTable(list){let rows=list.filter(t=>cat==='All'||t.category===cat);
+  if(sortBy==='fit')rows=[...rows].sort((a,b)=>b.fit-a.fit);if(sortBy==='public')rows=[...rows].sort((a,b)=>(b.public??-1)-(a.public??-1));
+  $('rows').innerHTML=rows.map(t=>`<tr class="${t===list[0]?'top':''}"><td class="num">${t.rank}${t.tied?'=':''}</td><td><button type="button" class="tool-btn" data-tool="${esc(t.name)}" aria-expanded="${open.has(t.name)}">${esc(t.name)}</button><span class="sub">${esc(t.category)}</span></td><td class="num total">${t.total.toFixed(2)}</td><td class="num">${t.fit.toFixed(2)}</td><td class="num">${t.public==null?'none':t.public.toFixed(2)}<span class="sub">${esc(t.confidence)}</span></td>${cols.map(c=>`<td>${pill((t.capabilities||{})[c.key])}</td>`).join('')}<td>${esc(t.price)}</td><td>${esc(t.storage)}</td><td>${hnBar(t.hn)}</td></tr>`+
+  (open.has(t.name)?`<tr class="detail"><td colspan="${cols.length+8}"><div class="detail-grid"><div><b>Every rating found</b>${ratingText(t)}</div><div><b>Top praise</b>${ref(t.praise)}</div><div><b>Top complaint</b>${ref(t.complaint)}</div><div><b>Must-haves</b><span class="${t.tier?'gate-pass':'gate-fail'}">${esc(t.gate_note||(t.tier?'Passes':'Fails'))}</span></div><div><b>Maintenance</b>${esc(t.maintenance)}</div><div><b>Fit inputs</b><span class="num">${crit.map(c=>`${esc(c.label)} ${t.scores[c.key]}`).join(' · ')}</span></div><div><b>Source</b>${link('Official page',t.url)}</div></div></td></tr>`:'')).join('')}
+function renderChart(list){const pts=list.filter(t=>t.public!=null);const vals=pts.map(t=>t.public);const lo=Math.floor(Math.min(...vals,8)*2)/2-.0,hi=Math.ceil(Math.max(...vals,lo+1)*2)/2;
+  const svg=$('scatter'),X=f=>64+f*76,Y=p=>360-(p-lo)/(hi-lo)*320,css=n=>`var(--${n})`,best=list[0];
+  let s=svg.querySelector('title').outerHTML+svg.querySelector('desc').outerHTML;
+  for(let i=0;i<=10;i+=2)s+=`<line x1="${X(i)}" x2="${X(i)}" y1="40" y2="360" stroke="${css('rule')}"/><text x="${X(i)}" y="382" text-anchor="middle" font-family="IBM Plex Mono,monospace" font-size="12" fill="${css('muted')}">${i}</text>`;
+  for(let p=lo;p<=hi+.001;p+=.5)s+=`<line x1="64" x2="824" y1="${Y(p)}" y2="${Y(p)}" stroke="${css('rule')}"/><text x="54" y="${Y(p)+4}" text-anchor="end" font-family="IBM Plex Mono,monospace" font-size="12" fill="${css('muted')}">${p.toFixed(1)}</text>`;
+  s+=`<text x="444" y="412" text-anchor="middle" font-size="13" fill="${css('muted')}">Use-case fit out of 10</text><text x="64" y="20" font-size="13" fill="${css('muted')}">Public feedback out of 10</text>`;
+  const bestPub=[...pts].sort((a,b)=>b.public-a.public)[0],named=new Set([best.name,bestPub&&bestPub.name,list[1]&&list[1].name]);
+  [...pts].reverse().forEach(t=>{const x=X(t.fit),y=Y(t.public),f=t===best;
+    s+=`<circle class="pt" tabindex="0" role="button" aria-label="${esc(t.name)}, fit ${t.fit.toFixed(2)}, public ${t.public.toFixed(2)}" data-n="${esc(t.name)}" data-f="${t.fit.toFixed(2)}" data-p="${t.public.toFixed(2)}" data-t="${t.total.toFixed(2)}" cx="${x}" cy="${y}" r="${f?9:7}" fill="${f?css('accent'):t.tier?css('fg'):css('panel')}" stroke="${t.tier||f?css('bg'):css('muted')}" stroke-width="2"/>`;
+    if(named.has(t.name)){const r=x<700;s+=`<text x="${x+(r?14:-14)}" y="${y+4}" text-anchor="${r?'start':'end'}" font-size="13" font-weight="700" fill="${css('fg')}">${esc(t.name)}</text>`}});
+  svg.innerHTML=s;$('axis-note').textContent=`Public feedback axis runs from ${lo.toFixed(1)} to ${hi.toFixed(1)}.`+(pts.length<list.length?` ${list.length-pts.length} tool(s) with no public evidence are not plotted.`:'')+' Hover or tab to a dot for its name.';
+  const tip=$('tip'),box=$('chart-box');svg.querySelectorAll('.pt').forEach(c=>{const show=()=>{const r=c.getBoundingClientRect(),b=box.getBoundingClientRect();tip.textContent=`${c.dataset.n}: fit ${c.dataset.f}, public ${c.dataset.p}, total ${c.dataset.t}`;tip.hidden=false;tip.style.left=Math.min(r.left-b.left+box.scrollLeft+14,box.scrollWidth-240)+'px';tip.style.top=Math.max(r.top-b.top-44,0)+'px'},hide=()=>tip.hidden=true;
+    c.addEventListener('mouseenter',show);c.addEventListener('focus',show);c.addEventListener('mouseleave',hide);c.addEventListener('blur',hide);c.addEventListener('click',show)})}
+function render(){const{share,w}=weights();$('o-fit').textContent=Math.round(share*100)+'%';keys.forEach((k,i)=>$('o-'+k).textContent=Math.round(w[i]*100)+'%');
+  const list=compute(),a=list[0],b=list[1],base=+$('w-fit').value===share0&&keys.every(k=>+$('w-'+k).value===+defaults[k]);
+  $('verdict').innerHTML=`<strong>Top pick with ${base?'the default':'your'} weights: ${esc(a.name)}, ${a.total.toFixed(2)}.</strong>`+(b?` Next is ${esc(b.name)} at ${b.total.toFixed(2)}${a.total-b.total<.5?', which counts as a tie':''}.`:'')+(a.name!==winner.name?` The pick changed from ${esc(winner.name)}.`:'');
+  renderChart(list);renderTable(list)}
+$('filters').addEventListener('click',e=>{const c=e.target.dataset.cat;if(!c)return;cat=c;[...$('filters').children].forEach(b=>b.setAttribute('aria-pressed',b.dataset.cat===c));render()});
+$('controls').addEventListener('input',render);
+$('reset').addEventListener('click',()=>{$('w-fit').value=share0;keys.forEach(k=>$('w-'+k).value=defaults[k]);render()});
+document.querySelector('#board thead').addEventListener('click',e=>{if(e.target.dataset.sort){sortBy=e.target.dataset.sort;render()}});
+$('rows').addEventListener('click',e=>{const n=e.target.dataset.tool;if(!n)return;open.has(n)?open.delete(n):open.add(n);render();const b=[...document.querySelectorAll('.tool-btn')].find(x=>x.dataset.tool===n);if(b)b.focus()});
+render();
+</script>
