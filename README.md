@@ -30,3 +30,5 @@ It needs two things:
 
 - A GitHub noreply address as your commit email.
 - A personal terms file at `~/.config/claude-skills/personal-terms.txt`, with one term per line and `#` for comments. Keep this file out of the repo, or set `PERSONAL_TERMS_FILE` to use another location.
+
+Every pull request also runs the same kinds of checks on GitHub in `.github/workflows/pr-check.yml`. It needs two repository secrets: `ANTHROPIC_API_KEY` for the AI review and `PERSONAL_TERMS` for the terms list. Results are generic on purpose, because Actions logs are public on this repo.
