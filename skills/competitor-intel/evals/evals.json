@@ -1,0 +1,49 @@
+{
+  "skill_name": "competitor-intel",
+  "evals": [
+    {
+      "id": 1,
+      "prompt": "I have an idea: a WhatsApp-first appointment and payments app for small salons in India. Who are my competitors, what do people say about them, what would I be missing, and how do I stand out?",
+      "expected_output": "Idea-mode context, three tier files from parallel agents, a gap check against the stated idea, and a published intel page.",
+      "expectations": [
+        "The brief restates the idea as product, buyer and problem, and marks the stage as idea",
+        "Three agents ran in parallel, one per tier, each writing its own tier_<tier>.json",
+        "Every row has a source_url, and vendor claims are marked unverified",
+        "Gap statuses quote the user's own description or say 'not mentioned'",
+        "The subtitle says status means 'in your plan', not shipped",
+        "The page was built by scripts/build_table.py and shows all 4 lenses and 3 tiers"
+      ]
+    },
+    {
+      "id": 2,
+      "prompt": "Here's our site: https://example-crm.com. Do a competitor analysis and tell me what we're missing versus the leaders.",
+      "expected_output": "Context read from the website's feature, pricing and docs pages, with gap evidence as URL plus section.",
+      "expectations": [
+        "The features, pricing and docs pages of the site were read before the research started",
+        "Gap evidence cites a URL and section of our site",
+        "'Coming soon' claims are marked Partial, not Built",
+        "The final message lists assumptions and any blocked sources"
+      ]
+    },
+    {
+      "id": 3,
+      "prompt": "Run a competitor analysis for our product; the code is in the org's frontend and backend repos.",
+      "expected_output": "Code-grounded gap check with file:line evidence, and a callout for any claim the code contradicts.",
+      "expectations": [
+        "Module or folder names were listed before grepping",
+        "Each gap has file:line or 'grep x = 0 hits' evidence",
+        "Queued-but-not-delivered features are marked Partial"
+      ]
+    },
+    {
+      "id": 4,
+      "prompt": "Refresh the competitor table, only what changed in the last 90 days.",
+      "expected_output": "A new dated run via --from-latest, updated rows, a re-run gap check and a v(N+1) page with a change list.",
+      "expectations": [
+        "scripts/new_run.sh --from-latest was used and no earlier run was overwritten",
+        "The output file name increments the version",
+        "The reply lists what changed since the last version"
+      ]
+    }
+  ]
+}

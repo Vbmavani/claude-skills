@@ -1,0 +1,167 @@
+{
+ "rules": [
+  {
+   "competitor": "Zenoti",
+   "finding_starts": "Zenoti has a large integrations",
+   "group": "Missing",
+   "status": "Staff app is a PWA; integrations limited to outbound webhooks (clinozy-be README). No native iOS/Android or white-label patient app."
+  },
+  {
+   "competitor": "Zenoti",
+   "finding_starts": "Zenoti includes built-in marketing",
+   "group": "Partial",
+   "status": "Offers/packages exist (Offerings room) and a 'marketing' patient consent exists; no loyalty points and no campaign delivery yet. WhatsApp/Instagram delivery is designed but not wired: messages queue in an outbox and the messaging service URL is 'reserved, nothing reads it yet' (clinozy-be/src/shared/config/env-schema.ts:258-268). Today staff reply through wa.me click-to-chat links."
+  },
+  {
+   "competitor": "Practo (Ray / Insta HMS)",
+   "finding_starts": "Practo offers patient-facing",
+   "group": "Missing",
+   "status": "No public booking page, consumer app or teleconsult found in clinozy-fe/clinozy-be (grep: online booking, teleconsult = 0 hits)."
+  },
+  {
+   "competitor": "Pabau",
+   "finding_starts": "Automated pre-care and post-care",
+   "group": "Partial",
+   "status": "Task kind 'aftercare' exists (clinozy-be/src/domains/app/sub-domains/tasks/tasks.constants.ts:26) and 'Let Clinozy handle' can queue it, but no delivery yet. WhatsApp/Instagram delivery is designed but not wired: messages queue in an outbox and the messaging service URL is 'reserved, nothing reads it yet' (clinozy-be/src/shared/config/env-schema.ts:258-268). Today staff reply through wa.me click-to-chat links."
+  },
+  {
+   "competitor": "Pabau",
+   "finding_starts": "Photo consent can be split",
+   "group": "Already built",
+   "status": "Patient consents are already split into data / photos / marketing (clinozy-fe/src/shared/api/app/patients-contracts.ts:75)."
+  },
+  {
+   "competitor": "Aesthetic Record",
+   "finding_starts": "AR has a Patient Wallet",
+   "group": "Partial",
+   "status": "Pending credits exist in the Payments ledger (clinozy-fe/src/shared/components/LedgerCells/ledger-cells.ts); no patient wallet, stored credit or rewards."
+  },
+  {
+   "competitor": "Boulevard",
+   "finding_starts": "Boulevard enforces deposits",
+   "group": "Missing",
+   "status": "'no_show' appointment status exists, but no deposit, card-on-file or cancellation-fee logic (grep 'deposit' = 0 hits)."
+  },
+  {
+   "competitor": "Clinicea",
+   "finding_starts": "Clinicea exposes an API",
+   "group": "Partial",
+   "status": "Outbound webhooks and an optional MCP server exist (clinozy-be README); no documented public API for clinics. Discounts exist via Offers."
+  },
+  {
+   "competitor": "HealthPlix",
+   "finding_starts": "AI-OCR and analytics",
+   "group": "Missing",
+   "status": "AI features are reserved but not built (clinozy-be/src/shared/config/env-schema.ts:258)."
+  },
+  {
+   "competitor": "HealthPlix",
+   "finding_starts": "HealthPlix has a mobile EMR",
+   "group": "Partial",
+   "status": "Staff use the PWA on phones (52px mobile pills in Patients); no patient app."
+  },
+  {
+   "competitor": "MocDoc",
+   "finding_starts": "Reviewers ask for Tally",
+   "group": "Missing",
+   "status": "No Tally export found (only unrelated 'tally' word hits). CSV export exists."
+  },
+  {
+   "competitor": "MocDoc",
+   "finding_starts": "MocDoc's single-specialty page",
+   "group": "Partial",
+   "status": "Clinozy is derma/hair/aesthetic-specific by design (rooms for machines, sessions, photos), but has no specialty template builder."
+  },
+  {
+   "competitor": "Eka Care",
+   "finding_starts": "Eka runs a consumer PHR",
+   "group": "Missing",
+   "status": "No patient-facing app or PHR."
+  },
+  {
+   "competitor": "AestheticsPro",
+   "finding_starts": "The Executive tier and above",
+   "group": "Missing",
+   "status": "No client portal or recurring memberships (grep 'membership plan' = 0 hits; 'membership' in code means staff memberships)."
+  },
+  {
+   "competitor": "Moxie",
+   "finding_starts": "An AI assistant ('MAIA')",
+   "group": "Missing",
+   "status": "Stock room shows level and runway, but no AI reorder or supplier ordering."
+  },
+  {
+   "competitor": "Moxie",
+   "finding_starts": "Moxie offers automated messaging",
+   "group": "Partial",
+   "status": "Task kinds 'confirm' and 'gone_quiet' plus 'Let Clinozy handle' cover reminders, but delivery is not wired. WhatsApp/Instagram delivery is designed but not wired: messages queue in an outbox and the messaging service URL is 'reserved, nothing reads it yet' (clinozy-be/src/shared/config/env-schema.ts:258-268). Today staff reply through wa.me click-to-chat links."
+  },
+  {
+   "competitor": "Cliniceo",
+   "finding_starts": "Cliniceo's site has patient",
+   "group": "Partial",
+   "status": "The patient's plan already exists: suggested offerings with quantity, price and status (clinozy-be/src/domains/app/sub-domains/patients/patient-offering-suggestions). What is missing is a quotation the patient receives and accepts."
+  },
+  {
+   "competitor": "Cliniceo",
+   "finding_starts": "Aesthetic peers (Cliniceo",
+   "group": "Partial",
+   "status": "Three data consents exist (data/photos/marketing), but no procedure-specific e-consent forms with signature. Signed consent documents can be uploaded as patient reports."
+  },
+  {
+   "competitor": "Clinicea",
+   "finding_starts": "Users report limited pathology",
+   "group": "Partial",
+   "status": "Lab, scan and consent documents can be uploaded to the patient file, up to 10 per patient (patients/patient-reports). There is no lab ordering or lab partner integration."
+  },
+  {
+   "competitor": "DoctorsApp",
+   "finding_starts": "DoctorsApp claims AI-assisted",
+   "group": "Missing",
+   "status": "Before/after photos exist; no AI image analysis."
+  },
+  {
+   "competitor": "DoctorsApp",
+   "finding_starts": "DoctorsApp pushes ABDM",
+   "group": "Missing",
+   "status": "No ABDM/ABHA integration (1 incidental hit)."
+  },
+  {
+   "competitor": "Picky Assist (Derma & Hair Transplant)",
+   "finding_starts": "Its derma page claims",
+   "group": "Missing",
+   "status": "Pre-launch: no published outcome metrics yet."
+  },
+  {
+   "competitor": "Picky Assist (Derma & Hair Transplant)",
+   "finding_starts": "Picky Assist offers chatbot",
+   "group": "Missing",
+   "status": "Automation is task-rule based; no conversational bot or auto-reply (grep chatbot/auto-reply = 0)."
+  },
+  {
+   "competitor": "TeleCRM (hair transplant / clinic CRM)",
+   "finding_starts": "TeleCRM sells call-centre",
+   "group": "Missing",
+   "status": "No telephony: dialer, call recording or missed-call capture."
+  },
+  {
+   "competitor": "Zavis",
+   "finding_starts": "Zavis sends WhatsApp payment",
+   "group": "Missing",
+   "status": "UPI exists only as a payment mode on the ledger (clinozy-be/.../payments.constants.ts:56); no payment links. Stripe is for Clinozy's own SaaS billing."
+  },
+  {
+   "competitor": "Zavis",
+   "finding_starts": "Zavis has a unified inbox",
+   "group": "Partial",
+   "status": "Contacts store Instagram handles and Instagram is a lead source; Instagram DM delivery is in the outbox design but not wired. WhatsApp/Instagram delivery is designed but not wired: messages queue in an outbox and the messaging service URL is 'reserved, nothing reads it yet' (clinozy-be/src/shared/config/env-schema.ts:258-268). Today staff reply through wa.me click-to-chat links."
+  }
+ ],
+ "area_rules": [
+  {
+   "feature_area": "WhatsApp",
+   "group": "Partial",
+   "status": "WhatsApp/Instagram delivery is designed but not wired: messages queue in an outbox and the messaging service URL is 'reserved, nothing reads it yet' (clinozy-be/src/shared/config/env-schema.ts:258-268). Today staff reply through wa.me click-to-chat links."
+  }
+ ]
+}

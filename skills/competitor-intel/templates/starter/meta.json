@@ -1,0 +1,147 @@
+{
+ "product": "YourProduct",
+ "eyebrow": "Competitor intelligence · EXAMPLE market",
+ "title": "Product Competitor Intel",
+ "subtitle": "STARTER TEMPLATE: replace every EXAMPLE value. N competitors in 3 tiers seen through 4 lenses: their advantages, what we are missing, how we stand out, and the psychology behind their features.",
+ "generated": "Researched YYYY-MM-DD",
+ "callout": "<b>Gap check.</b> Use this box for the biggest correction the gap check forced, or delete the key.",
+ "takeaways": [
+  {
+   "h": "Biggest open lane",
+   "p": "EXAMPLE: one or two sentences with a number and a source."
+  },
+  {
+   "h": "Most common complaint",
+   "p": "EXAMPLE: one or two sentences with a number and a source."
+  },
+  {
+   "h": "Pricing wedge",
+   "p": "EXAMPLE: one or two sentences with a number and a source."
+  },
+  {
+   "h": "Close first",
+   "p": "EXAMPLE: one or two sentences with a number and a source."
+  },
+  {
+   "h": "Psychology to use",
+   "p": "EXAMPLE: one or two sentences with a number and a source."
+  },
+  {
+   "h": "Already ahead",
+   "p": "EXAMPLE: one or two sentences with a number and a source."
+  }
+ ],
+ "footer": "Sources: list review sites and anything blocked. Built with the competitor-intel skill.",
+ "stages": [
+  {
+   "id": "Discover",
+   "label": "Discover",
+   "sub": "Ads, search, referral"
+  },
+  {
+   "id": "Evaluate",
+   "label": "Evaluate",
+   "sub": "Demo, pricing, trial"
+  },
+  {
+   "id": "Onboard",
+   "label": "Onboard",
+   "sub": "Setup, import"
+  },
+  {
+   "id": "Use",
+   "label": "Use",
+   "sub": "Core workflow"
+  },
+  {
+   "id": "Pay",
+   "label": "Pay",
+   "sub": "Billing, plans"
+  },
+  {
+   "id": "Retain",
+   "label": "Retain",
+   "sub": "Support, expand"
+  }
+ ],
+ "capabilities": [
+  {
+   "stage": "Discover",
+   "name": "EXAMPLE Free trial",
+   "status": "Built",
+   "evidence": "EXAMPLE: file:line, URL or 'grep x = 0 hits'",
+   "match": "free"
+  },
+  {
+   "stage": "Discover",
+   "name": "EXAMPLE Marketplace listing",
+   "status": "Missing",
+   "evidence": "EXAMPLE: file:line, URL or 'grep x = 0 hits'",
+   "match": "marketplace"
+  },
+  {
+   "stage": "Evaluate",
+   "name": "EXAMPLE Public pricing",
+   "status": "Built",
+   "evidence": "EXAMPLE: file:line, URL or 'grep x = 0 hits'",
+   "match": "public"
+  },
+  {
+   "stage": "Onboard",
+   "name": "EXAMPLE Data import",
+   "status": "Partial",
+   "evidence": "EXAMPLE: file:line, URL or 'grep x = 0 hits'",
+   "match": "data"
+  },
+  {
+   "stage": "Use",
+   "name": "EXAMPLE Mobile app",
+   "status": "Missing",
+   "evidence": "EXAMPLE: file:line, URL or 'grep x = 0 hits'",
+   "match": "mobile"
+  },
+  {
+   "stage": "Use",
+   "name": "EXAMPLE Integrations",
+   "status": "Partial",
+   "evidence": "EXAMPLE: file:line, URL or 'grep x = 0 hits'",
+   "match": "integrations"
+  },
+  {
+   "stage": "Pay",
+   "name": "EXAMPLE Annual plans",
+   "status": "Built",
+   "evidence": "EXAMPLE: file:line, URL or 'grep x = 0 hits'",
+   "match": "annual"
+  },
+  {
+   "stage": "Retain",
+   "name": "EXAMPLE In-app support chat",
+   "status": "Missing",
+   "evidence": "EXAMPLE: file:line, URL or 'grep x = 0 hits'",
+   "match": "in-app"
+  }
+ ],
+ "levers": [
+  {
+   "name": "Loss aversion",
+   "match": "loss aversion",
+   "counter": "EXAMPLE counter-move"
+  },
+  {
+   "name": "Endowment",
+   "match": "endowment",
+   "counter": "EXAMPLE counter-move"
+  },
+  {
+   "name": "Social proof",
+   "match": "social proof",
+   "counter": "EXAMPLE counter-move"
+  },
+  {
+   "name": "Commitment & sunk cost",
+   "match": "commitment|sunk cost",
+   "counter": "EXAMPLE counter-move"
+  }
+ ]
+}
