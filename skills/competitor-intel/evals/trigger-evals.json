@@ -1,0 +1,13 @@
+[
+  {"query": "Who are the competitors for my idea of a meal-planning app for diabetics?", "should_trigger": true},
+  {"query": "Here's my website, find my competitors and what I'm missing", "should_trigger": true},
+  {"query": "What are competitors doing that we aren't?", "should_trigger": true},
+  {"query": "Refresh the competitor table", "should_trigger": true},
+  {"query": "How can we stand out from Zenoti and Practo?", "should_trigger": true},
+  {"query": "What psychology do competitors use in their pricing and onboarding, and how do we beat it?", "should_trigger": true},
+  {"query": "Make a competitive landscape and battlecard for our CRM", "should_trigger": true},
+  {"query": "Find the top 15 tools for invoicing and score them", "should_trigger": false},
+  {"query": "Debate whether we should build a mobile app", "should_trigger": false},
+  {"query": "Audit my Instagram feed", "should_trigger": false},
+  {"query": "Fix the failing login test", "should_trigger": false}
+]

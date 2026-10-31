@@ -1,0 +1,434 @@
+<title>__TITLE__</title>
+<meta name="claude:viewport-fit-sides" content="cover">
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Bricolage+Grotesque:opsz,wght@12..96,500;12..96,700;12..96,800&family=Instrument+Sans:wght@400;500;600&family=IBM+Plex+Mono:wght@400;500&display=swap">
+<style>
+/* Layout: dark hero with readiness gauge -> journey "track" (stage nodes on a rail, capability cards hanging below)
+   -> action cards -> chart bento (dot-strip gap pressure, bubble battleground, competitor bars, lever meters) -> scroll-boxed explorer. */
+:root{
+  --plane:#f2f5f4; --surface:#ffffff; --surface-2:#f7f9f8; --ink:#0f1817; --ink-2:#4a5856; --muted:#7c8987; --line:#dfe6e4; --grid:#e9eeed;
+  --accent:#0f7a70; --accent-soft:#e0f1ee; --accent-glow:rgba(43,196,176,.28);
+  --s1:#2a78d6; --s2:#eb6834; --s3:#1baf7a; --s4:#eda100;
+  --good:#0ca30c; --warn:#fab219; --crit:#d03b3b; --good-ink:#006300; --warn-ink:#8a5a00; --crit-ink:#b42318;
+  --t1:#0f7a70; --t2:#5fb3a8; --t3:#b9dcd6;
+  --hero-bg:#0b201e; --hero-2:#12312d; --hero-ink:#ecf6f4; --hero-muted:#95b6b1; --hero-line:rgba(236,246,244,.12);
+  --shadow:0 1px 2px rgba(15,24,23,.04),0 8px 24px -12px rgba(15,24,23,.12);
+  --f-display:"Bricolage Grotesque","Segoe UI",system-ui,sans-serif;
+  --f-body:"Instrument Sans","Segoe UI",system-ui,sans-serif;
+  --f-mono:"IBM Plex Mono",ui-monospace,Menlo,monospace;
+}
+@media (prefers-color-scheme: dark){:root:not([data-theme="light"]){
+  --plane:#0a0f0e; --surface:#121a19; --surface-2:#172120; --ink:#e8efed; --ink-2:#b2c1be; --muted:#7c8987; --line:#23302d; --grid:#1c2624;
+  --accent:#4cc9b9; --accent-soft:#143029; --accent-glow:rgba(76,201,185,.22);
+  --s1:#3987e5; --s2:#d95926; --s3:#199e70; --s4:#c98500;
+  --good-ink:#5fd35f; --warn-ink:#f4c55a; --crit-ink:#f28a8a;
+  --t1:#4cc9b9; --t2:#2f8a7f; --t3:#1d4b45;
+  --hero-bg:#071614; --hero-2:#0e2623; --shadow:0 1px 2px rgba(0,0,0,.3),0 10px 30px -14px rgba(0,0,0,.6); color-scheme:dark}}
+:root[data-theme="dark"]{
+  --plane:#0a0f0e; --surface:#121a19; --surface-2:#172120; --ink:#e8efed; --ink-2:#b2c1be; --muted:#7c8987; --line:#23302d; --grid:#1c2624;
+  --accent:#4cc9b9; --accent-soft:#143029; --accent-glow:rgba(76,201,185,.22);
+  --s1:#3987e5; --s2:#d95926; --s3:#199e70; --s4:#c98500;
+  --good-ink:#5fd35f; --warn-ink:#f4c55a; --crit-ink:#f28a8a;
+  --t1:#4cc9b9; --t2:#2f8a7f; --t3:#1d4b45;
+  --hero-bg:#071614; --hero-2:#0e2623; --shadow:0 1px 2px rgba(0,0,0,.3),0 10px 30px -14px rgba(0,0,0,.6); color-scheme:dark}
+*{box-sizing:border-box}
+html{scroll-behavior:smooth}
+body{background:var(--plane);color:var(--ink);font:15px/1.5 var(--f-body);margin:0}
+body::before{content:"";position:fixed;inset:0 0 auto;height:env(safe-area-inset-top,0px);z-index:30;background:var(--hero-bg)}
+.pad{padding-left:max(16px,env(safe-area-inset-left,0px));padding-right:max(16px,env(safe-area-inset-right,0px))}
+.in{max-width:1280px;margin:0 auto}
+h1,h2,h3{font-family:var(--f-display);letter-spacing:-.015em;text-wrap:balance;margin:0}
+h2{font-size:clamp(23px,2.6vw,31px);font-weight:700}
+.eyebrow{font:600 11px var(--f-body);text-transform:uppercase;letter-spacing:.1em;color:var(--accent)}
+.lede{color:var(--ink-2);margin:8px 0 0;max-width:68ch}
+a{color:var(--accent)}
+:focus-visible{outline:2px solid var(--accent);outline-offset:2px;border-radius:4px}
+.sr{position:absolute;width:1px;height:1px;overflow:hidden;clip:rect(0 0 0 0)}
+
+/* ---------- hero ---------- */
+.hero{position:relative;overflow:hidden;color:var(--hero-ink);padding-block:44px 40px;
+  background:radial-gradient(900px 420px at 85% 10%,var(--accent-glow),transparent 60%),
+             radial-gradient(rgba(236,246,244,.07) 1px,transparent 1.4px) 0 0/22px 22px,
+             linear-gradient(180deg,var(--hero-bg),var(--hero-2))}
+.hero .in{display:grid;grid-template-columns:minmax(0,1.15fr) minmax(0,1fr);gap:40px;align-items:center}
+.hero .eyebrow{color:var(--hero-muted)}
+.hero h1{font-size:clamp(36px,5.4vw,66px);font-weight:800;line-height:.98;margin-top:10px}
+.hero h1 em{font-style:normal;color:var(--accent)}
+.hero p{color:var(--hero-muted);max-width:56ch;margin:16px 0 0}
+.chips{display:flex;flex-wrap:wrap;gap:8px;margin-top:18px}
+.chip{font:500 12px var(--f-mono);color:var(--hero-ink);border:1px solid var(--hero-line);background:rgba(236,246,244,.04);border-radius:999px;padding:5px 11px}
+.gauge{display:grid;grid-template-columns:auto minmax(0,1fr);gap:26px;align-items:center;background:rgba(236,246,244,.04);border:1px solid var(--hero-line);border-radius:18px;padding:22px;backdrop-filter:blur(6px)}
+.ring{width:190px;height:190px}
+.ring .seg{transition:stroke-width .2s}
+.ring .seg:hover{stroke-width:20}
+.ring text{font-family:var(--f-display)}
+.gstats{display:flex;flex-direction:column;gap:12px}
+.gs{display:grid;grid-template-columns:12px minmax(0,1fr) auto;gap:10px;align-items:center;font-size:14px}
+.gs .d{width:12px;height:12px;border-radius:50%}
+.gs b{font:700 22px/1 var(--f-display);font-variant-numeric:tabular-nums}
+.gs span{color:var(--hero-muted)}
+.gtot{border-top:1px solid var(--hero-line);padding-top:12px;display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:10px}
+.gtot b{display:block;font:700 26px/1 var(--f-display);font-variant-numeric:tabular-nums}
+.gtot span{font-size:12px;color:var(--hero-muted)}
+
+/* sticky section nav */
+.nav{position:sticky;top:env(safe-area-inset-top,0px);z-index:20;background:color-mix(in srgb,var(--plane) 86%,transparent);backdrop-filter:blur(10px);border-bottom:1px solid var(--line)}
+.nav .in{display:flex;gap:4px;overflow-x:auto;padding-block:8px}
+.nav a{font:600 13px var(--f-body);color:var(--ink-2);text-decoration:none;padding:7px 12px;border-radius:999px;white-space:nowrap}
+.nav a:hover{background:var(--accent-soft);color:var(--accent)}
+
+section{padding-block:44px 8px;scroll-margin-top:56px}
+.shead{display:flex;justify-content:space-between;align-items:flex-end;gap:16px;flex-wrap:wrap;margin-bottom:22px}
+.card{background:var(--surface);border:1px solid var(--line);border-radius:16px;padding:22px;min-width:0;box-shadow:var(--shadow)}
+
+/* status atoms */
+.st{display:inline-flex;align-items:center;gap:6px;font:600 12px var(--f-body);white-space:nowrap}
+.st i{width:18px;height:18px;border-radius:50%;display:inline-grid;place-items:center;font:800 10px/1 var(--f-body);font-style:normal;color:#fff;flex:none}
+.st.Built i{background:var(--good)} .st.Partial i{background:var(--warn);color:#0b0b0b} .st.Missing i{background:var(--crit)}
+.st.Built{color:var(--good-ink)} .st.Partial{color:var(--warn-ink)} .st.Missing{color:var(--crit-ink)}
+.keys{display:flex;gap:16px;flex-wrap:wrap;font-size:13px;color:var(--ink-2)}
+.keys span{display:inline-flex;align-items:center;gap:7px}
+.sw{width:10px;height:10px;border-radius:3px;display:inline-block;flex:none}
+.L-advantage{background:var(--s1)} .L-gap{background:var(--s2)} .L-stand_out{background:var(--s3)} .L-psychology{background:var(--s4)}
+
+/* ---------- journey track ---------- */
+.callout{display:flex;gap:14px;align-items:flex-start;background:var(--surface);border:1px solid var(--line);border-radius:14px;padding:14px 16px;margin-bottom:24px;box-shadow:var(--shadow)}
+.callout code{font:12px var(--f-mono);overflow-wrap:anywhere;background:var(--surface-2);padding:1px 5px;border-radius:4px}
+.trackwrap{overflow-x:auto;padding-bottom:10px;margin-inline:-4px;padding-inline:4px}
+.track{display:grid;grid-template-columns:repeat(7,minmax(168px,1fr));gap:12px;position:relative;min-width:1180px}
+.track::before{content:"";position:absolute;left:calc(100%/14);right:calc(100%/14);top:39px;height:3px;border-radius:2px;
+  background:repeating-linear-gradient(90deg,var(--line) 0 8px,transparent 8px 14px)}
+.stage{display:flex;flex-direction:column;align-items:stretch;gap:12px;min-width:0}
+.node{display:flex;flex-direction:column;align-items:center;gap:8px;position:relative;z-index:1}
+.node svg{width:80px;height:80px;background:var(--plane);border-radius:50%}
+.node h3{font-size:15px;font-weight:700;text-align:center}
+.node .sub{font-size:11.5px;color:var(--muted);text-align:center;margin-top:-6px}
+.scard{background:var(--surface);border:1px solid var(--line);border-radius:14px;padding:8px;box-shadow:var(--shadow);flex:1}
+.caps{list-style:none;margin:0;padding:0;display:flex;flex-direction:column;gap:2px}
+.cap{display:grid;grid-template-columns:18px minmax(0,1fr) auto;gap:8px;align-items:start;font-size:13px;line-height:1.3;padding:7px 6px;border-radius:8px;cursor:default;transition:background .15s}
+.cap:hover,.cap:focus-visible{background:var(--accent-soft)}
+.cap .n{font:500 11px var(--f-mono);color:var(--muted);background:var(--surface-2);border-radius:999px;padding:1px 7px;min-width:24px;text-align:center}
+.cap.Missing .n{color:var(--crit-ink)}
+
+/* ---------- takeaways ---------- */
+.takes{display:grid;grid-template-columns:repeat(auto-fit,minmax(min(100%,280px),1fr));gap:14px}
+.take{background:var(--surface);border:1px solid var(--line);border-radius:16px;padding:18px;display:grid;grid-template-columns:44px minmax(0,1fr);gap:14px;box-shadow:var(--shadow)}
+.take .ix{width:44px;height:44px;border-radius:12px;background:var(--accent-soft);color:var(--accent);display:grid;place-items:center;font:800 19px/1 var(--f-display)}
+.take h3{font:700 16px/1.25 var(--f-display);margin:2px 0 5px}
+.take p{margin:0;font-size:13.5px;color:var(--ink-2)}
+
+/* ---------- bento charts ---------- */
+.bento{display:grid;grid-template-columns:repeat(12,minmax(0,1fr));gap:16px}
+.b7{grid-column:span 7}.b5{grid-column:span 5}.b6{grid-column:span 6}.b12{grid-column:span 12}
+.ct{font:700 18px/1.2 var(--f-display);margin:0}
+.cs{font-size:13px;color:var(--muted);margin:4px 0 16px}
+.chead{display:flex;justify-content:space-between;align-items:flex-start;gap:12px;flex-wrap:wrap}
+/* dot strip */
+.strip{display:flex;flex-direction:column;gap:4px}
+.srow{display:grid;grid-template-columns:20px minmax(0,230px) minmax(0,1fr) 30px;gap:10px;align-items:center;padding:6px 8px;border-radius:10px;transition:background .15s}
+.srow:hover{background:var(--surface-2)}
+.srow .lab{font-size:13.5px;overflow:hidden;text-overflow:ellipsis;white-space:nowrap}
+.dots{display:flex;flex-wrap:wrap;gap:4px;align-items:center;position:relative}
+.dots::before{content:"";position:absolute;left:0;right:0;top:50%;height:1px;background:var(--grid);z-index:0}
+.dot{width:14px;height:14px;border-radius:50%;box-shadow:0 0 0 2px var(--surface);position:relative;z-index:1;transition:transform .15s}
+.dot:hover{transform:scale(1.35)}
+.dot.Top{background:var(--t1)} .dot.Medium{background:var(--t2)} .dot.Peer{background:var(--t3)}
+.srow .v{font:700 16px var(--f-display);text-align:right;font-variant-numeric:tabular-nums}
+/* bubble matrix */
+.bub{display:grid;gap:0;overflow-x:auto}
+.bub .h{font:600 10.5px var(--f-body);text-transform:uppercase;letter-spacing:.04em;color:var(--ink-2);padding:0 2px 10px;display:flex;flex-direction:column;gap:5px;align-items:center;justify-content:flex-end;text-align:center}
+.bub .r{font-size:13px;color:var(--ink-2);padding:0 10px 0 0;display:flex;align-items:center;white-space:nowrap;border-top:1px solid var(--grid)}
+.bub .c{display:grid;place-items:center;height:44px;border-top:1px solid var(--grid);cursor:default}
+.bub .c i{display:grid;place-items:center;border-radius:50%;font:600 11px var(--f-mono);font-style:normal;color:#fff;box-shadow:0 0 0 2px var(--surface);transition:transform .15s}
+.bub .c:hover i{transform:scale(1.15)}
+.bub .c i.L-psychology{color:#0b0b0b}
+.bub .c i.zero{width:4px;height:4px;background:var(--line);box-shadow:none}
+/* competitor bars */
+.tierblock{display:grid;grid-template-columns:72px minmax(0,1fr);gap:12px;padding:10px 0;border-top:1px solid var(--grid)}
+.tierblock:first-of-type{border-top:0}
+.tiertag{font:600 11px var(--f-body);text-transform:uppercase;letter-spacing:.08em;color:var(--ink-2);display:flex;gap:6px;align-items:flex-start;padding-top:4px}
+.crow{display:grid;grid-template-columns:minmax(0,120px) minmax(0,1fr) 26px;gap:10px;align-items:center;font-size:13px;padding:3px 0}
+.crow .lab{overflow:hidden;text-overflow:ellipsis;white-space:nowrap}
+.stack{display:flex;height:14px;gap:2px}
+.stack span{height:100%;transition:opacity .15s}
+.stack span:first-child{border-radius:4px 0 0 4px}.stack span:last-child{border-radius:0 4px 4px 0}
+.bars.dim .stack span:not(.on){opacity:.18}
+.crow .v{font:500 12px var(--f-mono);color:var(--ink-2);text-align:right}
+/* lever meters */
+.levers{display:grid;grid-template-columns:repeat(auto-fit,minmax(min(100%,230px),1fr));gap:10px}
+.lev{border:1px solid var(--line);border-radius:12px;padding:12px 14px;background:var(--surface-2);display:flex;flex-direction:column;gap:8px}
+.lev .top{display:flex;justify-content:space-between;align-items:baseline;gap:8px}
+.lev b{font:700 15px var(--f-display)}
+.lev .num{font:800 24px/1 var(--f-display);color:var(--accent);font-variant-numeric:tabular-nums}
+.meter{display:flex;gap:3px}
+.meter span{flex:1;height:7px;border-radius:2px;background:var(--line)}
+.meter span.on{background:var(--accent)}
+.lev p{margin:0;font-size:12.5px;color:var(--ink-2)}
+.lev p::before{content:"Counter · ";font-weight:600;color:var(--ink)}
+
+/* ---------- explorer ---------- */
+.lenses{display:flex;flex-wrap:wrap;gap:8px;margin-bottom:12px}
+.lens{font:600 13.5px var(--f-body);border:1px solid var(--line);background:var(--surface);color:var(--ink);padding:8px 14px;border-radius:999px;cursor:pointer;display:inline-flex;gap:8px;align-items:center;transition:background .15s,border-color .15s}
+.lens:hover{border-color:var(--accent)}
+.lens .n{font:500 12px var(--f-mono);color:var(--muted)}
+.lens[aria-pressed="true"]{background:var(--ink);color:var(--surface);border-color:var(--ink)}
+.lens[aria-pressed="true"] .n{color:var(--surface)}
+.explorer{background:var(--surface);border:1px solid var(--line);border-radius:16px;box-shadow:var(--shadow);overflow:hidden}
+.filters{display:flex;flex-wrap:wrap;gap:10px;align-items:end;padding:14px;border-bottom:1px solid var(--line);background:var(--surface-2)}
+.filters label{display:flex;flex-direction:column;gap:4px;font:600 11px var(--f-body);text-transform:uppercase;letter-spacing:.06em;color:var(--muted)}
+.filters select,.filters input{font:14px var(--f-body);color:var(--ink);background:var(--surface);border:1px solid var(--line);border-radius:8px;padding:8px 9px;min-width:0;max-width:210px}
+.filters .grow{flex:1 1 200px}.filters .grow input{max-width:none;width:100%}
+.btn{font:600 13px var(--f-body);background:var(--accent-soft);color:var(--accent);border:1px solid transparent;border-radius:8px;padding:9px 13px;cursor:pointer}
+.btn:hover{border-color:var(--accent)}
+.count{font:13px var(--f-mono);color:var(--muted);margin-left:auto}
+.tablebox{overflow:auto;max-height:min(72vh,760px);overscroll-behavior:contain}
+table{border-collapse:separate;border-spacing:0;width:100%;min-width:980px}
+th,td{text-align:left;vertical-align:top;padding:11px 14px;border-bottom:1px solid var(--line)}
+thead th{position:sticky;top:0;z-index:2;font:600 11px var(--f-body);text-transform:uppercase;letter-spacing:.06em;color:var(--muted);background:var(--surface);cursor:pointer;white-space:nowrap;box-shadow:0 1px 0 var(--line)}
+thead th:hover{color:var(--accent)}
+tbody tr[data-id]{cursor:pointer;transition:background .12s}
+tbody tr[data-id]:hover{background:var(--accent-soft)}
+td.f{max-width:44ch;font-size:14px}
+.pill{display:inline-flex;align-items:center;gap:6px;font:600 12px var(--f-body);white-space:nowrap;color:var(--ink-2)}
+.mono{font:500 12px var(--f-mono);color:var(--ink-2)}
+.tierpill{display:inline-flex;align-items:center;gap:6px;font:500 12px var(--f-mono);color:var(--ink-2)}
+.unv{font:11px var(--f-mono);color:var(--warn-ink)}
+tr.detail td{background:var(--surface-2);cursor:default}
+.dl{display:grid;grid-template-columns:repeat(auto-fit,minmax(min(100%,240px),1fr));gap:16px}
+.dl h4{margin:0 0 4px;font:600 11px var(--f-body);text-transform:uppercase;letter-spacing:.06em;color:var(--muted)}
+.dl p{margin:0;overflow-wrap:anywhere;font-size:14px}
+.empty{padding:36px;text-align:center;color:var(--muted)}
+.tfoot{padding:10px 14px;font-size:12.5px;color:var(--muted);border-top:1px solid var(--line);background:var(--surface-2)}
+footer{color:var(--muted);font-size:13px;padding-block:28px 48px}
+
+#tip{position:fixed;pointer-events:none;z-index:40;background:var(--ink);color:var(--surface);font-size:12.5px;line-height:1.45;padding:9px 11px;border-radius:8px;max-width:290px;opacity:0;transition:opacity .12s;box-shadow:0 8px 24px rgba(0,0,0,.25)}
+#tip b{display:block;margin-bottom:2px}
+@media (max-width:980px){.b7,.b5,.b6{grid-column:span 12}.hero .in{grid-template-columns:1fr}}
+@media (max-width:560px){.gauge{grid-template-columns:1fr;justify-items:center}.srow{grid-template-columns:18px minmax(0,1fr) 26px}.srow .dots{grid-column:2/4}.crow{grid-template-columns:minmax(0,90px) minmax(0,1fr) 24px}.tierblock{grid-template-columns:1fr}}
+@media (prefers-reduced-motion:reduce){*{transition:none!important;scroll-behavior:auto!important}}
+</style>
+
+<header class="hero pad"><div class="in">
+  <div>
+    <div class="eyebrow">__EYEBROW__</div>
+    <h1 id="h1">__TITLE__</h1>
+    <p>__SUBTITLE__</p>
+    <div class="chips" id="chips"></div>
+  </div>
+  <div class="gauge">
+    <svg class="ring" viewBox="0 0 190 190" role="img" id="ring"></svg>
+    <div class="gstats" id="gstats"></div>
+  </div>
+</div></header>
+
+<nav class="nav pad" aria-label="Sections"><div class="in">
+  <a href="#journey">Where we stand</a><a href="#act">What to act on</a><a href="#market">Market pressure</a><a href="#explore">All findings</a>
+</div></nav>
+
+<section class="pad" id="journey" aria-labelledby="h-journey"><div class="in">
+  <div class="shead"><div><div class="eyebrow">Where __PRODUCT__ stands</div><h2 id="h-journey">__JOURNEY__</h2>
+    <p class="lede">Each ring is one stage of the customer journey. Every capability was checked against our product as described (idea, website, docs or code). The chip on the right shows how many competitors offer it. Hover over any item for its evidence.</p></div>
+    <div class="keys"><span class="st Built"><i>✓</i>Built</span><span class="st Partial"><i>–</i>Partial</span><span class="st Missing"><i>✕</i>Missing</span></div></div>
+  <div class="callout" id="callout" hidden></div>
+  <div class="trackwrap"><div class="track" id="track"></div></div>
+</div></section>
+
+<section class="pad" id="act" aria-labelledby="h-takes"><div class="in">
+  <div class="shead"><div><div class="eyebrow">So what</div><h2 id="h-takes">Six things to act on</h2></div></div>
+  <div class="takes" id="takes"></div>
+</div></section>
+
+<section class="pad" id="market" aria-labelledby="h-charts"><div class="in">
+  <div class="shead"><div><div class="eyebrow">The market</div><h2 id="h-charts">Where the pressure is</h2>
+    <p class="lede">Every count below is computed from the sourced findings. Hover over a dot, bubble or bar for the detail.</p></div></div>
+  <div class="bento">
+    <div class="card b7"><div class="chead"><div><h3 class="ct">Gap pressure</h3><p class="cs">__PRODUCT__'s missing and partial capabilities. Each dot is a competitor that offers it.</p></div>
+      <div class="keys"><span><span class="dot Top" style="width:10px;height:10px"></span>Top</span><span><span class="dot Medium" style="width:10px;height:10px"></span>Medium</span><span><span class="dot Peer" style="width:10px;height:10px"></span>Peer</span></div></div>
+      <div class="strip" id="gapChart"></div></div>
+    <div class="card b5"><h3 class="ct">Battleground</h3><p class="cs">Findings per feature area for each lens. Bubble area shows the count.</p><div class="bub" id="bub"></div></div>
+    <div class="card b6"><div class="chead"><div><h3 class="ct">Evidence by competitor</h3><p class="cs">Findings per competitor. Hover over a colour to isolate that lens.</p></div><div class="keys" id="lensLegend"></div></div><div class="bars" id="stacks"></div></div>
+    <div class="card b6"><h3 class="ct">Psychology levers</h3><p class="cs">How often competitors rely on each lever, and __PRODUCT__'s counter-move</p><div class="levers" id="levers"></div></div>
+  </div>
+</div></section>
+
+<section class="pad" id="explore" aria-labelledby="h-ex"><div class="in">
+  <div class="shead"><div><div class="eyebrow">Evidence</div><h2 id="h-ex">Explore every finding</h2>
+    <p class="lede">Pick a lens, then narrow it down. The table scrolls on its own. Click a row to see what users said, the psychology and the code check.</p></div></div>
+  <nav class="lenses" id="lenses" aria-label="Lens"></nav>
+  <div class="explorer">
+    <form class="filters" id="filters" onsubmit="return false">
+      <label for="q" class="grow">Search<input id="q" type="search" placeholder="WhatsApp, deposit, pricing…"></label>
+      <label for="fTier">Tier<select id="fTier"></select></label>
+      <label for="fComp">Competitor<select id="fComp"></select></label>
+      <label for="fArea">Feature area<select id="fArea"></select></label>
+      <label for="fStatus">__PRODUCT__ status<select id="fStatus"></select></label>
+      <label for="fConf">Confidence<select id="fConf"></select></label>
+      <button type="button" class="btn" id="reset">Reset</button>
+      <button type="button" class="btn" id="copy">Copy view as CSV</button>
+      <span class="count" id="count" aria-live="polite"></span>
+    </form>
+    <div class="tablebox" id="tablebox" tabindex="0" aria-label="Findings table, scrollable"><table>
+      <thead><tr><th data-k="tier" scope="col">Tier</th><th data-k="competitor" scope="col">Competitor</th><th data-k="dimension" scope="col">Lens</th><th data-k="feature_area" scope="col">Area</th><th data-k="finding" scope="col">Finding</th><th data-k="our_action" scope="col">__PRODUCT__ move</th><th data-k="our_status_group" scope="col">__PRODUCT__ status</th><th data-k="source_date" scope="col">Source</th></tr></thead>
+      <tbody id="rows"></tbody>
+    </table></div>
+    <div class="tfoot">Sort by clicking a column header. Rows marked <span class="unv">unverified</span> rest on vendor claims or analysis.</div>
+  </div>
+  <footer id="foot"></footer>
+</div></section>
+<div id="tip" role="tooltip"></div>
+
+<script>
+const DATA = /*__DATA__*/;
+const LENS = {advantage:"Competitor advantages", gap:"Missing in __PRODUCT__", stand_out:"How we stand out", psychology:"Psychology & how to beat it"};
+const LS = {advantage:"Advantage", gap:"Gap", stand_out:"Stand out", psychology:"Psychology"};
+const ICON = {Built:"✓", Partial:"–", Missing:"✕"};
+const TIERS = ["Top","Medium","Peer"];
+const $ = s => document.querySelector(s);
+const esc = s => String(s??"").replace(/[&<>"]/g,c=>({"&":"&amp;","<":"&lt;",">":"&gt;",'"':"&quot;"}[c]));
+const rows = DATA.rows, caps = DATA.capabilities||[], stages = DATA.stages||[], levers = DATA.levers||[];
+const comps = [...new Set(rows.map(r=>r.competitor))];
+const tierOf = {}; rows.forEach(r=>{ if(!tierOf[r.competitor]||TIERS.indexOf(r.tier)<TIERS.indexOf(tierOf[r.competitor])) tierOf[r.competitor]=r.tier; });
+const short = c => c.replace(/\s*\(.*\)/,"");
+const st = s => s ? `<span class="st ${s}"><i aria-hidden="true">${ICON[s]}</i>${s}</span>` : "";
+
+caps.forEach(c=>{const re=new RegExp(c.match,"i"); c.comps=[...new Set(rows.filter(r=>re.test(r.finding)).map(r=>r.competitor))]
+  .sort((a,b)=>TIERS.indexOf(tierOf[a])-TIERS.indexOf(tierOf[b]));});
+const count = (list,k) => list.filter(c=>c.status===k).length;
+const B=count(caps,"Built"),P=count(caps,"Partial"),M=count(caps,"Missing"),T=caps.length||1;
+
+/* donut helper: segments [[value,color,label]] */
+function donut(size,r,w,segs,total,gapPx,center){
+  const C=2*Math.PI*r,cx=size/2; let off=0;
+  const arcs=segs.map(([v,col,lab])=>{ if(!v) return ""; const len=v/total*C, g=Math.min(gapPx,len/2);
+    const a=`<circle class="seg" cx="${cx}" cy="${cx}" r="${r}" fill="none" stroke="${col}" stroke-width="${w}" stroke-linecap="round"
+      stroke-dasharray="${Math.max(len-g-w*0.9,0.5)} ${C}" stroke-dashoffset="${-(off+g/2+w*0.45)}" transform="rotate(-90 ${cx} ${cx})" data-tip="<b>${lab}</b>${v} of ${total}"/>`;
+    off+=len; return a; }).join("");
+  return `<circle cx="${cx}" cy="${cx}" r="${r}" fill="none" stroke="currentColor" stroke-opacity=".1" stroke-width="${w}"/>${arcs}${center||""}`;
+}
+
+/* hero */
+(function(){
+  const h=$("#h1"); h.innerHTML=h.textContent.replace(/(\S+)$/,"<em>$1</em>");
+  $("#ring").style.color="var(--hero-ink)";
+  $("#ring").innerHTML=`<title>${B} built, ${P} partial, ${M} missing of ${T} capabilities</title>`+donut(190,78,16,
+    [[B,"var(--good)","Built"],[P,"var(--warn)","Partial"],[M,"var(--crit)","Missing"]],T,10,
+    `<text x="95" y="96" text-anchor="middle" font-size="46" font-weight="800" fill="var(--hero-ink)">${Math.round(B/T*100)}<tspan font-size="22">%</tspan></text>
+     <text x="95" y="120" text-anchor="middle" font-size="12" fill="var(--hero-muted)" font-family="var(--f-body)">of ${T} capabilities built</text>`);
+  $("#gstats").innerHTML=[[B,"Built","var(--good)"],[P,"Partial","var(--warn)"],[M,"Missing","var(--crit)"]]
+    .map(([v,l,c])=>`<div class="gs"><span class="d" style="background:${c}"></span><span>${l}</span><b>${v}</b></div>`).join("")+
+    `<div class="gtot"><div><b>${rows.length}</b><span>sourced findings</span></div><div><b>${comps.length}</b><span>competitors</span></div></div>`;
+  const tc=TIERS.map(t=>`${t} ${[...new Set(rows.filter(r=>r.tier===t).map(r=>r.competitor))].length}`);
+  $("#chips").innerHTML=[DATA.generated, ...tc, `${rows.filter(r=>r.confidence==="verified").length} verified rows`].filter(Boolean).map(x=>`<span class="chip">${esc(x)}</span>`).join("");
+})();
+if (DATA.callout){$("#callout").innerHTML=`<span class="st Partial"><i>!</i></span><div>${DATA.callout}</div>`;$("#callout").hidden=false;}
+
+/* journey track */
+$("#track").style.gridTemplateColumns=`repeat(${stages.length},minmax(168px,1fr))`; $("#track").style.minWidth=`${stages.length*172}px`;
+$("#track").innerHTML = stages.map(s=>{
+  const cs=caps.filter(c=>c.stage===s.id), b=count(cs,"Built"), p=count(cs,"Partial"), m=count(cs,"Missing"), n=cs.length||1;
+  const ord={Missing:0,Partial:1,Built:2};
+  return `<div class="stage">
+    <div class="node"><svg viewBox="0 0 80 80" role="img" aria-label="${s.label}: ${b} built, ${p} partial, ${m} missing" style="color:var(--ink)">${donut(80,32,7,[[b,"var(--good)","Built"],[p,"var(--warn)","Partial"],[m,"var(--crit)","Missing"]],n,5,
+      `<text x="40" y="45" text-anchor="middle" font-size="16" font-weight="800" font-family="var(--f-display)" fill="var(--ink)">${b}/${cs.length}</text>`)}</svg>
+      <h3>${esc(s.label)}</h3><div class="sub">${esc(s.sub)}</div></div>
+    <div class="scard"><ul class="caps">${cs.sort((x,y)=>ord[x.status]-ord[y.status]||y.comps.length-x.comps.length).map(c=>`<li class="cap ${c.status}" tabindex="0"
+      data-tip="<b>${esc(c.name)} · ${c.status}</b>${esc(c.evidence)}<br><br>Offered by: ${esc(c.comps.map(short).join(", ")||"none in findings")}">
+      <span class="st ${c.status}"><i aria-hidden="true">${ICON[c.status]}</i></span><span><span class="sr">${c.status}: </span>${esc(c.name)}</span><span class="n" title="${c.comps.length} competitors">${c.comps.length}</span></li>`).join("")}</ul></div></div>`;
+}).join("");
+
+/* takeaways */
+$("#takes").innerHTML=(DATA.takeaways||[]).map((t,i)=>`<div class="take"><div class="ix">${i+1}</div><div><h3>${esc(t.h)}</h3><p>${esc(t.p)}</p></div></div>`).join("");
+
+/* gap pressure dot strip */
+(function(){
+  const g=caps.filter(c=>c.status!=="Built"&&c.comps.length).sort((a,b)=>b.comps.length-a.comps.length||(a.status==="Missing"?-1:1)).slice(0,12);
+  $("#gapChart").innerHTML=g.map(c=>`<div class="srow"><span class="st ${c.status}" title="${c.status}"><i aria-hidden="true">${ICON[c.status]}</i></span>
+    <span class="lab" title="${esc(c.name)}"><span class="sr">${c.status}: </span>${esc(c.name)}</span>
+    <div class="dots">${c.comps.map(x=>`<span class="dot ${tierOf[x]}" data-tip="<b>${esc(x)}</b>${tierOf[x]} tier"></span>`).join("")}</div>
+    <span class="v">${c.comps.length}</span></div>`).join("");
+})();
+
+/* bubble battleground */
+(function(){
+  const areas=Object.entries(rows.reduce((a,r)=>(a[r.feature_area]=(a[r.feature_area]||0)+1,a),{})).sort((a,b)=>b[1]-a[1]).slice(0,11).map(x=>x[0]);
+  const L=Object.keys(LENS), cell=(a,l)=>rows.filter(r=>r.feature_area===a&&r.dimension===l).length;
+  const max=Math.max(1,...areas.flatMap(a=>L.map(l=>cell(a,l))));
+  const el=$("#bub"); el.style.gridTemplateColumns=`minmax(96px,auto) repeat(${L.length},minmax(48px,1fr))`;
+  el.innerHTML=`<div></div>`+L.map(l=>`<div class="h"><span class="sw L-${l}"></span>${LS[l]}</div>`).join("")+
+    areas.map(a=>`<div class="r">${esc(a)}</div>`+L.map(l=>{const v=cell(a,l); const d=v?Math.round(12+Math.sqrt(v/max)*26):0;
+      return `<div class="c" data-tip="<b>${esc(a)} · ${LS[l]}</b>${v} findings">${v?`<i class="L-${l}" style="width:${d}px;height:${d}px">${d>=20?v:""}</i>`:`<i class="zero"></i>`}</div>`}).join("")).join("");
+})();
+
+/* competitor stacks with lens isolate */
+(function(){
+  const L=Object.keys(LENS);
+  $("#lensLegend").innerHTML=L.map(l=>`<span data-l="${l}" style="cursor:default"><span class="sw L-${l}"></span>${LS[l]}</span>`).join("");
+  const by={}; rows.forEach(r=>{(by[r.tier]=by[r.tier]||{});(by[r.tier][r.competitor]=by[r.tier][r.competitor]||[]).push(r)});
+  const max=Math.max(...Object.values(by).flatMap(t=>Object.values(t).map(x=>x.length)));
+  $("#stacks").innerHTML=TIERS.filter(t=>by[t]).map(t=>`<div class="tierblock"><div class="tiertag"><span class="dot ${t}" style="width:9px;height:9px;margin-top:2px"></span>${t}</div><div>`+
+    Object.entries(by[t]).sort((a,b)=>b[1].length-a[1].length).map(([c,rs])=>`<div class="crow"><span class="lab" title="${esc(c)}">${esc(short(c))}</span>
+      <div class="stack" style="width:${rs.length/max*100}%">${L.map(l=>{const n=rs.filter(r=>r.dimension===l).length;return n?`<span class="L-${l}" data-l="${l}" style="flex:${n}" data-tip="<b>${esc(c)}</b>${LS[l]}: ${n} of ${rs.length}"></span>`:""}).join("")}</div>
+      <span class="v">${rs.length}</span></div>`).join("")+`</div></div>`).join("");
+  const bars=$("#stacks");
+  const iso=l=>{bars.classList.toggle("dim",!!l);bars.querySelectorAll(".stack span").forEach(s=>s.classList.toggle("on",s.dataset.l===l));};
+  document.addEventListener("pointerover",e=>{const t=e.target.closest("#stacks [data-l], #lensLegend [data-l]");iso(t?t.dataset.l:null);});
+})();
+
+/* lever meters */
+(function(){
+  const pr=rows.filter(r=>r.dimension==="psychology");
+  const ls=levers.map(l=>{const re=new RegExp(l.match,"i");return {...l,n:pr.filter(r=>re.test((r.psychology||"")+" "+r.finding)).length}}).sort((a,b)=>b.n-a.n);
+  const max=Math.max(10,...ls.map(l=>l.n));
+  $("#levers").innerHTML=ls.map(l=>`<div class="lev" data-tip="<b>${esc(l.name)}</b>Named in ${l.n} of ${pr.length} psychology findings">
+    <div class="top"><b>${esc(l.name)}</b><span class="num">${l.n}</span></div>
+    <div class="meter" aria-hidden="true">${Array.from({length:max},(_,i)=>`<span class="${i<l.n?"on":""}"></span>`).join("")}</div>
+    <p>${esc(l.counter)}</p></div>`).join("");
+})();
+
+/* tooltip */
+const tip=$("#tip");
+function showTip(el,x,y){tip.innerHTML=el.dataset.tip;tip.style.opacity=1;const w=tip.offsetWidth,h=tip.offsetHeight;
+  tip.style.left=Math.min(innerWidth-w-8,Math.max(8,x+14))+"px";tip.style.top=(y-h-14<8?y+18:y-h-14)+"px";}
+document.addEventListener("pointermove",e=>{const el=e.target.closest("[data-tip]");el?showTip(el,e.clientX,e.clientY):tip.style.opacity=0;});
+document.addEventListener("focusin",e=>{const el=e.target.closest("[data-tip]");if(el){const b=el.getBoundingClientRect();showTip(el,b.left,b.top);}});
+document.addEventListener("focusout",()=>tip.style.opacity=0);
+addEventListener("scroll",()=>tip.style.opacity=0,{passive:true});
+
+/* explorer */
+let lens="all",sortK=null,sortDir=1;const open=new Set();
+try{lens=localStorage.getItem("ci-lens")||"all"}catch(e){} if(lens!=="all"&&!LENS[lens])lens="all";
+function opts(id,key){const v=[...new Set(rows.map(r=>r[key]).filter(Boolean))].sort();$(id).innerHTML=`<option value="">All</option>`+v.map(x=>`<option>${esc(x)}</option>`).join("");}
+opts("#fTier","tier");opts("#fComp","competitor");opts("#fArea","feature_area");opts("#fStatus","our_status_group");opts("#fConf","confidence");
+function filtered(){const q=$("#q").value.trim().toLowerCase();const f={tier:$("#fTier").value,competitor:$("#fComp").value,feature_area:$("#fArea").value,our_status_group:$("#fStatus").value,confidence:$("#fConf").value};
+  let o=rows.filter(r=>(lens==="all"||r.dimension===lens)&&Object.entries(f).every(([k,v])=>!v||r[k]===v)&&(!q||JSON.stringify(r).toLowerCase().includes(q)));
+  if(sortK)o=[...o].sort((a,b)=>String(a[sortK]||"").localeCompare(String(b[sortK]||""))*sortDir);return o;}
+const stMap=g=>g==="Already built"?"Built":g;
+function render(){
+  $("#lenses").innerHTML=[["all","All findings",rows.length],...Object.entries(LENS).map(([k,v])=>[k,v,rows.filter(r=>r.dimension===k).length])]
+    .map(([k,v,n])=>`<button type="button" class="lens" data-l="${k}" aria-pressed="${k===lens}">${k!=="all"?`<span class="sw L-${k}"></span>`:""}${v}<span class="n">${n}</span></button>`).join("");
+  document.querySelectorAll("thead th").forEach(th=>{th.textContent=th.textContent.replace(/ [↑↓]$/,"");if(th.dataset.k===sortK)th.textContent+=sortDir>0?" ↑":" ↓";});
+  const list=filtered();$("#count").textContent=`${list.length} of ${rows.length} shown`;
+  if(!list.length){$("#rows").innerHTML=`<tr><td colspan="8" class="empty">No findings match. Clear a filter or the search.</td></tr>`;return;}
+  $("#rows").innerHTML=list.map(r=>`<tr data-id="${r.id}" tabindex="0" aria-expanded="${open.has(r.id)}">
+    <td><span class="tierpill"><span class="dot ${r.tier}" style="width:9px;height:9px;box-shadow:none"></span>${esc(r.tier)}</span></td><td><b style="font-weight:600">${esc(r.competitor)}</b></td>
+    <td><span class="pill"><span class="sw L-${r.dimension}"></span>${LS[r.dimension]}</span></td>
+    <td>${esc(r.feature_area)}</td><td class="f">${esc(r.finding)}</td><td class="f">${esc(r.our_action)}</td>
+    <td>${st(stMap(r.our_status_group))}</td>
+    <td><a href="${esc(r.source_url)}" target="_blank" rel="noopener">Source ↗</a><br><span class="mono">${esc(r.source_date||"")}</span>${r.confidence==="unverified"?' <span class="unv">unverified</span>':""}</td></tr>`+
+    (open.has(r.id)?`<tr class="detail"><td colspan="8"><div class="dl"><div><h4>What users say</h4><p>${esc(r.public_reaction||"No public reaction captured.")}</p></div><div><h4>Psychology</h4><p>${esc(r.psychology||"—")}</p></div><div><h4>__PRODUCT__ code check</h4><p>${esc(r.our_status||"Not checked (not a gap row)")}</p></div><div><h4>Source</h4><p><a href="${esc(r.source_url)}" target="_blank" rel="noopener">${esc(r.source_url)}</a></p></div></div></td></tr>`:"")).join("");
+}
+document.addEventListener("click",e=>{
+  const l=e.target.closest(".lens");if(l){lens=l.dataset.l;try{localStorage.setItem("ci-lens",lens)}catch(_){}render();$("#tablebox").scrollTop=0;return;}
+  const th=e.target.closest("thead th[data-k]");if(th){const k=th.dataset.k;sortDir=sortK===k?-sortDir:1;sortK=k;render();return;}
+  if(e.target.closest("a"))return;
+  const tr=e.target.closest("tbody tr[data-id]");if(tr){const id=+tr.dataset.id;open.has(id)?open.delete(id):open.add(id);render();}
+});
+document.addEventListener("keydown",e=>{const tr=e.target.closest&&e.target.closest("tbody tr[data-id]");if(tr&&(e.key==="Enter"||e.key===" ")){e.preventDefault();tr.click();}});
+["#q","#fTier","#fComp","#fArea","#fStatus","#fConf"].forEach(id=>$(id).addEventListener("input",()=>{render();$("#tablebox").scrollTop=0;}));
+$("#reset").onclick=()=>{$("#filters").reset();lens="all";sortK=null;render();};
+$("#copy").onclick=async()=>{const cols=["tier","competitor","dimension","feature_area","finding","public_reaction","psychology","our_action","our_status","source_url","source_date","confidence"];
+  const csv=[cols.join(",")].concat(filtered().map(r=>cols.map(c=>`"${String(r[c]??"").replace(/"/g,'""')}"`).join(","))).join("\n");
+  try{await navigator.clipboard.writeText(csv);$("#copy").textContent="Copied";}catch(_){$("#copy").textContent="Copy blocked";}
+  setTimeout(()=>$("#copy").textContent="Copy view as CSV",1800);};
+$("#foot").innerHTML=DATA.footer||"";
+render();
+</script>

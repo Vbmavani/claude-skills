@@ -1,0 +1,400 @@
+{
+ "product": "Clinozy",
+ "eyebrow": "Competitor intelligence · India skin, hair &amp; aesthetic clinics",
+ "title": "Clinozy Competitor Intel",
+ "subtitle": "16 competitors in 3 tiers (Top, Medium, Peer; Clinicea appears in both Medium and Peer) seen through 4 lenses: what they do well, what Clinozy is missing, where Clinozy can stand out, and the psychology behind their features. Click a row to see user reactions, the psychology and the code check.",
+ "generated": "Researched 2026-10-31 (IST)",
+ "callout": "<b>Code check.</b> Several sources treat a two-way WhatsApp inbox as Clinozy's biggest edge. In the code today, WhatsApp and Instagram messages are queued but not delivered. The messaging service is reserved and nothing reads it yet (<code>clinozy-be/src/shared/config/env-schema.ts:258</code>), so staff reply through wa.me links. The edge is real only once delivery ships.",
+ "takeaways": [
+  {
+   "h": "Biggest open lane",
+   "p": "None of the 5 top-tier leaders has a native two-way WhatsApp inbox. Clinozy queues these messages but does not send them yet, so shipping sending comes first."
+  },
+  {
+   "h": "Most common complaint",
+   "p": "Support and lock-in: Zenoti's 12–24 month contracts, HealthPlix at 2.8/5 on G2. Offer human WhatsApp support and cancel any time."
+  },
+  {
+   "h": "Pricing wedge",
+   "p": "Leaders price in USD per practitioner or hide prices. Peers anchor at ₹3.5k–15k a year. Flat INR per branch, GST included, sits between them."
+  },
+  {
+   "h": "Close first",
+   "p": "Deposits through UPI payment links, a sendable quotation, memberships and a wallet, a public booking link."
+  },
+  {
+   "h": "Psychology to use",
+   "p": "Expiring packages (loss aversion), wallet balance (endowment), progress cards (goal-gradient), a review request after the reveal (peak-end)."
+  },
+  {
+   "h": "Already ahead",
+   "p": "Machines as bookable resources, a pharmacy with batches and MRs, the Today floor board, priced treatment plans and next-offering ideas."
+  }
+ ],
+ "footer": "Sources: reviews on G2, Capterra, Trustpilot, Google Play and Software Advice (mostly from search snippets, because review pages were blocked from this session), plus vendor sites. Rows marked <i>unverified</i> rest on vendor claims or analysis. The psychology rows are analysis. Built with the competitor-intel skill.",
+ "stages": [
+  {
+   "id": "Enquiry",
+   "label": "Enquiry",
+   "sub": "Ads, WhatsApp, Instagram"
+  },
+  {
+   "id": "Booking",
+   "label": "Booking",
+   "sub": "Slot, resource, reminder"
+  },
+  {
+   "id": "Arrival",
+   "label": "Arrival",
+   "sub": "Check-in, consent"
+  },
+  {
+   "id": "Consult",
+   "label": "Consult & treat",
+   "sub": "Rx, photos, plan"
+  },
+  {
+   "id": "Checkout",
+   "label": "Checkout",
+   "sub": "Bill, package, pay"
+  },
+  {
+   "id": "Pharmacy",
+   "label": "Pharmacy & stock",
+   "sub": "Dispense, reorder"
+  },
+  {
+   "id": "Retention",
+   "label": "Retention",
+   "sub": "Follow-up, review, rebook"
+  }
+ ],
+ "capabilities": [
+  {
+   "stage": "Enquiry",
+   "name": "Lead inbox with Mine / Unreplied views",
+   "status": "Built",
+   "evidence": "Leads room (clinozy-fe .../leads/LEADS.OVERVIEW.md)",
+   "match": "lead|enquir|inbox"
+  },
+  {
+   "stage": "Enquiry",
+   "name": "Two-way WhatsApp messages",
+   "status": "Partial",
+   "evidence": "Queued to an outbox, not delivered yet (clinozy-be env-schema.ts:258); staff use wa.me links",
+   "match": "whatsapp"
+  },
+  {
+   "stage": "Enquiry",
+   "name": "Instagram DMs",
+   "status": "Partial",
+   "evidence": "Instagram handles and lead source stored; DM delivery not wired",
+   "match": "instagram"
+  },
+  {
+   "stage": "Enquiry",
+   "name": "Calling, IVR, missed-call capture",
+   "status": "Missing",
+   "evidence": "No telephony code",
+   "match": "calling|dialer|ivr|telephon|call recording|missed.call|call-cent"
+  },
+  {
+   "stage": "Enquiry",
+   "name": "Chatbot and auto-replies",
+   "status": "Missing",
+   "evidence": "Automation is task rules only",
+   "match": "chatbot|bot\\b|auto-repl|ai assistant|ai receptionist"
+  },
+  {
+   "stage": "Booking",
+   "name": "Doctor, room and machine calendar",
+   "status": "Built",
+   "evidence": "Appointments room",
+   "match": "calendar|scheduling|resource"
+  },
+  {
+   "stage": "Booking",
+   "name": "Public online booking link",
+   "status": "Missing",
+   "evidence": "No patient-facing booking page",
+   "match": "online booking|book online|self-book|booking page|booking link|reserve with google|google book"
+  },
+  {
+   "stage": "Booking",
+   "name": "Deposits and no-show fees",
+   "status": "Missing",
+   "evidence": "no_show status exists; no deposit logic",
+   "match": "deposit|no-show|cancellation fee"
+  },
+  {
+   "stage": "Booking",
+   "name": "Automated reminders",
+   "status": "Partial",
+   "evidence": "'confirm' task kind plus 'Let Clinozy handle'; sending not wired",
+   "match": "reminder"
+  },
+  {
+   "stage": "Arrival",
+   "name": "Live Today floor board",
+   "status": "Built",
+   "evidence": "Today room: enquiring to pharmacy",
+   "match": "floor|front desk|check-in|queue"
+  },
+  {
+   "stage": "Arrival",
+   "name": "Walk-in and check-in",
+   "status": "Built",
+   "evidence": "Today room actions",
+   "match": "walk-in|check-in"
+  },
+  {
+   "stage": "Arrival",
+   "name": "Data / photo / marketing consent",
+   "status": "Built",
+   "evidence": "patients-contracts.ts:75",
+   "match": "consent"
+  },
+  {
+   "stage": "Arrival",
+   "name": "Procedure e-consent with signature",
+   "status": "Partial",
+   "evidence": "Signed consent can be uploaded as a report; no e-sign forms",
+   "match": "consent form|e-consent|digital consent|sign"
+  },
+  {
+   "stage": "Consult",
+   "name": "Prescriptions and doctor Rx kits",
+   "status": "Built",
+   "evidence": "patient-prescriptions, prescription-kits",
+   "match": "prescri|e-rx|rx\\b"
+  },
+  {
+   "stage": "Consult",
+   "name": "Before/after photos",
+   "status": "Built",
+   "evidence": "patient-images",
+   "match": "photo|before.?after|imag"
+  },
+  {
+   "stage": "Consult",
+   "name": "Treatment plan with priced offerings",
+   "status": "Built",
+   "evidence": "patient-offering-suggestions",
+   "match": "treatment plan|quotation|care plan"
+  },
+  {
+   "stage": "Consult",
+   "name": "Next-offering ideas from history",
+   "status": "Built",
+   "evidence": "patient-ideas (rule-based; AI reserved)",
+   "match": "upsell|recommend|suggest"
+  },
+  {
+   "stage": "Consult",
+   "name": "Sendable quotation the patient accepts",
+   "status": "Missing",
+   "evidence": "Plan exists but nothing is sent to the patient",
+   "match": "quotation|quote"
+  },
+  {
+   "stage": "Consult",
+   "name": "AI scribe and image analysis",
+   "status": "Missing",
+   "evidence": "AI_SERVICE_URL reserved, not built",
+   "match": "\\bai\\b|scribe|ocr|artificial"
+  },
+  {
+   "stage": "Consult",
+   "name": "Lab orders",
+   "status": "Partial",
+   "evidence": "Lab reports can be uploaded (patient-reports); no ordering",
+   "match": "\\blab|patholog"
+  },
+  {
+   "stage": "Consult",
+   "name": "ABDM / ABHA",
+   "status": "Missing",
+   "evidence": "No integration",
+   "match": "abdm|abha"
+  },
+  {
+   "stage": "Checkout",
+   "name": "Payments ledger, GST invoices, day close",
+   "status": "Built",
+   "evidence": "Payments room",
+   "match": "invoice|billing|gst|pos|checkout"
+  },
+  {
+   "stage": "Checkout",
+   "name": "UPI as a payment mode",
+   "status": "Built",
+   "evidence": "payments.constants.ts:56",
+   "match": "upi"
+  },
+  {
+   "stage": "Checkout",
+   "name": "Payment links in chat",
+   "status": "Missing",
+   "evidence": "No payment links",
+   "match": "payment link|pay link|razorpay"
+  },
+  {
+   "stage": "Checkout",
+   "name": "Packages and offers",
+   "status": "Built",
+   "evidence": "Offerings room",
+   "match": "package"
+  },
+  {
+   "stage": "Checkout",
+   "name": "Patient wallet and stored credit",
+   "status": "Partial",
+   "evidence": "Pending credits only",
+   "match": "wallet|credit"
+  },
+  {
+   "stage": "Checkout",
+   "name": "Recurring memberships",
+   "status": "Missing",
+   "evidence": "'membership' in code means staff",
+   "match": "membership|subscription"
+  },
+  {
+   "stage": "Checkout",
+   "name": "Staff commissions",
+   "status": "Built",
+   "evidence": "Users room",
+   "match": "commission"
+  },
+  {
+   "stage": "Checkout",
+   "name": "Tally export",
+   "status": "Missing",
+   "evidence": "CSV export only",
+   "match": "tally|accounting|quickbooks|xero"
+  },
+  {
+   "stage": "Pharmacy",
+   "name": "Medicine store: batches, expiry, MRs",
+   "status": "Built",
+   "evidence": "Medical room",
+   "match": "pharmac|medicine|dispens"
+  },
+  {
+   "stage": "Pharmacy",
+   "name": "Clinic stock and runway",
+   "status": "Built",
+   "evidence": "Stock room",
+   "match": "inventory|stock"
+  },
+  {
+   "stage": "Pharmacy",
+   "name": "AI reordering",
+   "status": "Missing",
+   "evidence": "Runway shown; no auto-ordering",
+   "match": "reorder|supply|purchase order"
+  },
+  {
+   "stage": "Retention",
+   "name": "Follow-up and recall views",
+   "status": "Built",
+   "evidence": "Patients room views",
+   "match": "follow-up|recall|retention"
+  },
+  {
+   "stage": "Retention",
+   "name": "Task rules and automations",
+   "status": "Built",
+   "evidence": "Tasks room",
+   "match": "automat|workflow|rule"
+  },
+  {
+   "stage": "Retention",
+   "name": "Aftercare messages",
+   "status": "Partial",
+   "evidence": "'aftercare' task kind; sending not wired",
+   "match": "aftercare|post-care|pre-care|post-treatment"
+  },
+  {
+   "stage": "Retention",
+   "name": "Google review requests",
+   "status": "Built",
+   "evidence": "Review request after payment (ChatColumn)",
+   "match": "review request|google review|reputation"
+  },
+  {
+   "stage": "Retention",
+   "name": "Loyalty and referral rewards",
+   "status": "Partial",
+   "evidence": "Referral source captured; no rewards",
+   "match": "loyalty|referral|reward|points"
+  },
+  {
+   "stage": "Retention",
+   "name": "Campaigns and broadcasts",
+   "status": "Missing",
+   "evidence": "No campaign module",
+   "match": "campaign|broadcast|marketing"
+  },
+  {
+   "stage": "Retention",
+   "name": "Patient app or portal",
+   "status": "Missing",
+   "evidence": "Staff PWA only",
+   "match": "patient app|client app|portal|phr|consumer app"
+  }
+ ],
+ "levers": [
+  {
+   "name": "Loss aversion",
+   "match": "loss aversion|loss-aversion",
+   "counter": "UPI token deposit framed as 'adjusted in your bill'; '2 sessions left' nudges"
+  },
+  {
+   "name": "Social proof",
+   "match": "social proof",
+   "counter": "Before/after gallery from photos with marketing consent"
+  },
+  {
+   "name": "Endowment",
+   "match": "endowment",
+   "counter": "Wallet balance shown in every reminder"
+  },
+  {
+   "name": "Commitment & sunk cost",
+   "match": "commitment|sunk cost|consistency",
+   "counter": "Plan, then accepted quote, then package with a progress bar"
+  },
+  {
+   "name": "Speed & reciprocity",
+   "match": "speed-to-lead|speed to lead|reciprocity|immediacy",
+   "counter": "Unreplied-lead timer and 'revenue at risk' counter"
+  },
+  {
+   "name": "Authority & status",
+   "match": "authority|status|identity|prestige",
+   "counter": "Clinic-owned booking page, no marketplace ranking"
+  },
+  {
+   "name": "Anchoring & pricing",
+   "match": "anchor|decoy|price framing|framing",
+   "counter": "Public INR price per branch, GST included"
+  },
+  {
+   "name": "Fear of complexity",
+   "match": "complexity|status quo|status-quo|cognitive load|simplicity|choice overload",
+   "counter": "Done-for-you onboarding on WhatsApp"
+  },
+  {
+   "name": "Goal-gradient & peak-end",
+   "match": "goal-gradient|goal gradient|peak-end|peak end|progress",
+   "counter": "Progress card mid-package; ask for a review after the reveal"
+  },
+  {
+   "name": "Switching costs",
+   "match": "switching cost|lock-in|lock in",
+   "counter": "Monthly plans, one-click full export"
+  }
+ ],
+ "journey_title": "The clinic journey, stage by stage"
+}

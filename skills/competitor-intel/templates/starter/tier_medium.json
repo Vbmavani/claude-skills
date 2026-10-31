@@ -1,0 +1,54 @@
+[
+ {
+  "competitor": "EXAMPLE MidSoft",
+  "tier": "Medium",
+  "dimension": "advantage",
+  "feature_area": "Booking",
+  "finding": "EXAMPLE: what this competitor does well, with a number if possible.",
+  "public_reaction": "",
+  "psychology": "",
+  "our_action": "EXAMPLE: copy, beat or ignore, and why.",
+  "source_url": "https://example.com/replace-with-real-source",
+  "source_date": "YYYY-MM",
+  "confidence": "unverified"
+ },
+ {
+  "competitor": "EXAMPLE MidSoft",
+  "tier": "Medium",
+  "dimension": "gap",
+  "feature_area": "Memberships/Packages",
+  "finding": "EXAMPLE: a feature they have that we may be missing. Code-check it before publishing.",
+  "public_reaction": "",
+  "psychology": "",
+  "our_action": "EXAMPLE: build or skip, and what it costs.",
+  "source_url": "https://example.com/replace-with-real-source",
+  "source_date": "YYYY-MM",
+  "confidence": "unverified"
+ },
+ {
+  "competitor": "EXAMPLE MidSoft",
+  "tier": "Medium",
+  "dimension": "stand_out",
+  "feature_area": "Onboarding/Support",
+  "finding": "EXAMPLE: a complaint users have about them.",
+  "public_reaction": "EXAMPLE: \"verbatim user quote\" (G2, 2026-01)",
+  "psychology": "",
+  "our_action": "EXAMPLE: how we message or build against it.",
+  "source_url": "https://example.com/replace-with-real-source",
+  "source_date": "YYYY-MM",
+  "confidence": "unverified"
+ },
+ {
+  "competitor": "EXAMPLE MidSoft",
+  "tier": "Medium",
+  "dimension": "psychology",
+  "feature_area": "Pricing",
+  "finding": "EXAMPLE: the feature that relies on a behavioural lever.",
+  "public_reaction": "",
+  "psychology": "EXAMPLE: loss aversion. Explain how the feature uses it.",
+  "our_action": "EXAMPLE: our counter-move.",
+  "source_url": "https://example.com/replace-with-real-source",
+  "source_date": "YYYY-MM",
+  "confidence": "unverified"
+ }
+]

@@ -1,0 +1,11 @@
+{
+ "rules": [
+  {
+   "competitor": "EXAMPLE Leader Co",
+   "finding_starts": "EXAMPLE: a feature they have",
+   "group": "Missing",
+   "status": "EXAMPLE: grep result plus file:line evidence from the repos"
+  }
+ ],
+ "area_rules": []
+}
