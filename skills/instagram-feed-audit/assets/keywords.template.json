@@ -1,0 +1,9 @@
+{
+  "goal": "",
+  "on_goal": {
+    "topic_name": ["related keyword"]
+  },
+  "off_goal_examples": [],
+  "keep_list": [],
+  "notes": "Keyword hits are a first pass. Judge each item from author, caption and audio."
+}
